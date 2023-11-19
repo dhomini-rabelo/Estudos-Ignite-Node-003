@@ -1,6 +1,6 @@
 import { ID } from './id'
 
-export abstract class Entity<Props> {
+export abstract class IEntity<Props> {
   private _id: ID
   protected props: Props
 
@@ -13,7 +13,7 @@ export abstract class Entity<Props> {
     this._id = id ?? new ID()
   }
 
-  public equals(entity: Entity<unknown>) {
+  public equals(entity: IEntity<unknown>) {
     if (entity === this) {
       return true
     }
