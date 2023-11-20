@@ -14,12 +14,16 @@ export class InMemoryPetRepository implements IPetRepository {
   }
 
   async findUniqueById(id: string) {
-    const itemsFound = this.items.filter(item => item.id.isEqual(new ID(id)))
+    const itemsFound = this.items.filter((item) => item.id.isEqual(new ID(id)))
     if (itemsFound.length > 1) {
       throw new ResourceRepeated()
     } else if (itemsFound.length === 0) {
       throw new ResourceNotFoundError()
     }
     return itemsFound[0]
+  }
+
+  async findMany(params: IPetProps) {
+    return this.items.filter((item) => item.ibgeCode === params.ibgeCode)
   }
 }
