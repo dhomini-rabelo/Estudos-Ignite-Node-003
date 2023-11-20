@@ -10,5 +10,8 @@ describe('Create a pet', () => {
       name: 'test',
     })
     expect(response.id.toString()).toEqual(expect.any(String))
+    expect(
+      (await petRepository.findUniqueById(response.id.toString())).isEqual(response)
+    ).toBeTruthy()
   })
 })
