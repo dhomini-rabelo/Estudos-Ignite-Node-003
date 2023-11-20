@@ -8,6 +8,14 @@ export interface IInstitutionProps {
 }
 
 export class Institution extends IEntity<IInstitutionProps> {
+  get address() {
+    return this.props.address
+  }
+
+  get name() {
+    return this.props.name
+  }
+
   static create(props: IInstitutionProps) {
     return new Institution(props)
   }
