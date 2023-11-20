@@ -25,4 +25,8 @@ export class InMemoryInstitutionRepository implements IInstitutionRepository {
     }
     return itemsFound[0]
   }
+
+  async reset() {
+    this.items = []
+  }
 }

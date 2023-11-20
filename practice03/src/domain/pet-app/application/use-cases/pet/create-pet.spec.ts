@@ -10,6 +10,11 @@ describe('Create a pet', () => {
   const institutionRepository = new InMemoryInstitutionRepository()
   const sut = new CreatePetUseCase(petRepository, institutionRepository)
 
+  beforeEach(async () => {
+    await petRepository.reset()
+    await institutionRepository.reset()
+  })
+
   it('should create a pet', async () => {
     const institution = await institutionRepository.create(
       makeInstitutionData(),

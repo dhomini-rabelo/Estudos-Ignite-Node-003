@@ -6,4 +6,5 @@ import {
 export interface IInstitutionRepository {
   create(props: IInstitutionProps): Promise<Institution>
   findUniqueById(id: string): Promise<Institution>
+  reset(): Promise<void>
 }

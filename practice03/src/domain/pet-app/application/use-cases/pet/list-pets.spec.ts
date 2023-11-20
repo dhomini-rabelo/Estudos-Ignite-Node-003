@@ -7,6 +7,10 @@ describe('List pets', () => {
   const petRepository = new InMemoryPetRepository()
   const sut = new ListPetsUseCase(petRepository)
 
+  beforeEach(async () => {
+    await petRepository.reset()
+  })
+
   it('should list all pets from city', async () => {
     const cityIBGECodeA = some.text()
     const cityIBGECodeB = some.text()
