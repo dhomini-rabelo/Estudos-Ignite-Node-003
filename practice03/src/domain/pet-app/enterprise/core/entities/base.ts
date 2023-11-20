@@ -1,6 +1,6 @@
 import { ID } from './id'
 
-export abstract class IEntity<Props> {
+export abstract class IEntity<Props extends object> {
   private _id: ID
   protected props: Props
 
@@ -13,7 +13,13 @@ export abstract class IEntity<Props> {
     this._id = id ?? new ID()
   }
 
-  public isEqual(entity: IEntity<unknown>) {
+  public getProp(propName: string) {
+    // eslint-disable-next-line
+    // @ts-ignore
+    return this.props[propName]
+  }
+
+  public isEqual(entity: IEntity<object>) {
     return entity === this || entity.id === this._id
   }
 }
