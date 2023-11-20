@@ -1,16 +1,16 @@
 import { IEntity } from '../core/entities/base'
 import { ID } from '../core/entities/id'
 
-interface PetProps {
+export interface IPetProps {
   name: string
 }
 
-export class Pet extends IEntity<PetProps> {
-  static create(props: PetProps) {
+export class Pet extends IEntity<IPetProps> {
+  static create(props: IPetProps) {
     return new Pet(props)
   }
 
-  static reference(id: ID, props: PetProps) {
+  static reference(id: ID, props: IPetProps) {
     return new Pet(props, id)
   }
 }

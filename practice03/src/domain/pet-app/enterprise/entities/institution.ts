@@ -1,16 +1,16 @@
 import { IEntity } from '../core/entities/base'
 import { ID } from '../core/entities/id'
 
-interface InstitutionProps {
+export interface IInstitutionProps {
   name: string
 }
 
-export class Institution extends IEntity<InstitutionProps> {
-  static create(props: InstitutionProps) {
+export class Institution extends IEntity<IInstitutionProps> {
+  static create(props: IInstitutionProps) {
     return new Institution(props)
   }
 
-  static reference(id: ID, props: InstitutionProps) {
+  static reference(id: ID, props: IInstitutionProps) {
     return new Institution(props, id)
   }
 }
