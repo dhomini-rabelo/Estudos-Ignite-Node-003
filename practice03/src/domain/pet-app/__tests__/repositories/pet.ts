@@ -23,7 +23,7 @@ export class InMemoryPetRepository implements IPetRepository {
     return itemsFound[0]
   }
 
-  async findMany(params: IPetProps) {
+  async findMany(params: Partial<IPetProps>) {
     return this.items.filter((item) => item.IBGECode === params.IBGECode)
   }
 }

@@ -12,7 +12,7 @@ describe('Create a pet', () => {
 
   it('should create a pet', async () => {
     const institution = await institutionRepository.create(
-      await makeInstitutionData(),
+      makeInstitutionData(),
     )
 
     const response = await sut.execute({
@@ -30,7 +30,7 @@ describe('Create a pet', () => {
 
   it('should ensure that the pet.IBGECode is the same as the institution.IBGECode', async () => {
     const institution = await institutionRepository.create(
-      await makeInstitutionData(),
+      makeInstitutionData(),
     )
 
     const response = await sut.execute({
