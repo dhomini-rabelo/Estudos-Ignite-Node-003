@@ -7,7 +7,7 @@ export class CreatePetUseCase implements IBaseUseCase {
   constructor(
     private petRepository: IPetRepository,
     private institutionRepository: IInstitutionRepository,
-  ) { }
+  ) {}
 
   async execute(request: Omit<IPetProps, 'IBGECode'>): Promise<Pet> {
     const institution = await this.institutionRepository.findUniqueById(
