@@ -1,7 +1,6 @@
 import { ID } from '../../enterprise/core/entities/id'
-import { WithID } from '../../enterprise/core/entities/types'
 import { IPetProps, Pet } from '../../enterprise/entities/pet'
-import { IPetRepository } from '../../ports/repositories/pet'
+import { IPetRepository } from '../../ports/database/repositories/pet'
 
 export class InMemoryPetRepository implements IPetRepository {
   private items: Pet[] = []

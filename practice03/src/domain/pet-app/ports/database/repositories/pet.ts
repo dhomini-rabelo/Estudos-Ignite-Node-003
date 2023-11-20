@@ -1,4 +1,4 @@
-import { IPetProps, Pet } from '../../enterprise/entities/pet'
+import { IPetProps, Pet } from '../../../enterprise/entities/pet'
 
 export interface IPetRepository {
   create(props: IPetProps): Promise<Pet>
