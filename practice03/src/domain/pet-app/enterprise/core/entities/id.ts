@@ -15,7 +15,7 @@ export class ID {
     this.value = value ?? randomUUID()
   }
 
-  public equals(id: ID) {
+  public isEqual(id: ID) {
     return this.value === id.toValue()
   }
 }
