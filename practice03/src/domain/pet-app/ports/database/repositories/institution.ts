@@ -1,4 +1,7 @@
-import { IInstitutionProps, Institution } from '../../../enterprise/entities/institution'
+import {
+  IInstitutionProps,
+  Institution,
+} from '../../../enterprise/entities/institution'
 
 export interface IInstitutionRepository {
   create(props: IInstitutionProps): Promise<Institution>
