@@ -1,7 +1,5 @@
-import { DatabaseError } from "./_base";
+import { DatabaseError } from './_base'
 
 export class ResourceNotFoundError extends DatabaseError {
-  constructor() {
-    super('Resource not found')
-  }
+  public type = 'resource-not-found'
 }

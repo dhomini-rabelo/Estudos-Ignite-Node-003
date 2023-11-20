@@ -1,7 +1,5 @@
-import { DatabaseError } from "./_base";
+import { DatabaseError } from './_base'
 
 export class ResourceRepeated extends DatabaseError {
-  constructor() {
-    super('Resource repeated')
-  }
+  public type = 'resource-repeated'
 }
