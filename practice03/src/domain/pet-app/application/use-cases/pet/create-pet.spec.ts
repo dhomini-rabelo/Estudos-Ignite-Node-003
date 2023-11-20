@@ -4,6 +4,7 @@ import { InMemoryInstitutionRepository } from '@/domain/pet-app/__tests__/reposi
 import { makeInstitutionData } from '@/domain/pet-app/__tests__/factories/institution'
 import { ResourceNotFoundError } from '@/domain/pet-app/ports/database/errors/resource-not-found'
 import { ID } from '@/domain/pet-app/enterprise/core/entities/id'
+import { makePetData } from '@/domain/pet-app/__tests__/factories/pet'
 
 describe('Create a pet', () => {
   const petRepository = new InMemoryPetRepository()
@@ -20,10 +21,9 @@ describe('Create a pet', () => {
       makeInstitutionData(),
     )
 
-    const response = await sut.execute({
-      name: 'test',
-      institutionId: institution.id,
-    })
+    const response = await sut.execute(
+      makePetData({ institutionId: institution.id }),
+    )
 
     expect(response.id.toString()).toEqual(expect.any(String))
     expect(
@@ -38,20 +38,16 @@ describe('Create a pet', () => {
       makeInstitutionData(),
     )
 
-    const response = await sut.execute({
-      name: 'test',
-      institutionId: institution.id,
-    })
+    const response = await sut.execute(
+      makePetData({ institutionId: institution.id }),
+    )
 
     expect(response.IBGECode).toEqual(institution.address.IBGECode)
   })
 
   it('should throw ResourceNotFoundError when institution not exists', async () => {
     await expect(async () => {
-      await sut.execute({
-        name: 'test',
-        institutionId: new ID(),
-      })
+      await sut.execute(makePetData({ institutionId: new ID() }))
     }).rejects.toThrow(ResourceNotFoundError)
   })
 })
