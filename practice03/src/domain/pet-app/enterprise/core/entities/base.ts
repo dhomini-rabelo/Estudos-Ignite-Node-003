@@ -13,15 +13,7 @@ export abstract class IEntity<Props> {
     this._id = id ?? new ID()
   }
 
-  public equals(entity: IEntity<unknown>) {
-    if (entity === this) {
-      return true
-    }
-
-    if (entity.id === this._id) {
-      return true
-    }
-
-    return false
+  public isEqual(entity: IEntity<unknown>) {
+    return entity === this || entity.id === this._id
   }
 }
