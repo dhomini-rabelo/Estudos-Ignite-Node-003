@@ -1,13 +1,15 @@
+import { some } from '@tests/utils/some'
+import { IAddress } from '../../enterprise/value-objects/address'
 import { IAddressGenerator } from '../../ports/address/contracts'
 
 export class MockAddressGenerator implements IAddressGenerator {
-  async fromZipCode(zipCode: string) {
+  async fromZipCode(zipCode: string): Promise<IAddress> {
     return {
       zipCode,
-      ibgeCode: '2105302',
-      city: 'Maranhão',
-      state: 'MA',
-      number: 'A20',
+      IBGECode: some.text(),
+      city: some.text(),
+      state: some.text(),
+      number: some.text(),
     }
   }
 }
