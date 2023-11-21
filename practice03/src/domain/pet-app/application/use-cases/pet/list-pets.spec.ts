@@ -26,9 +26,44 @@ describe('List pets', () => {
       },
     })
 
+    expect(response.length).toBe(2)
     expect(response).toEqual(
       expect.arrayContaining(
         createdPets.filter((pet) => pet.IBGECode === cityIBGECodeA),
+      ),
+    )
+  })
+
+  it('should filter pets by lifeStage', async () => {
+    const cityIBGECode = some.text()
+    const createdPets = await Promise.all([
+      petRepository.create(
+        makePetData({ IBGECode: cityIBGECode, lifeStage: 'junior' }),
+      ),
+      petRepository.create(
+        makePetData({ IBGECode: cityIBGECode, lifeStage: 'adult' }),
+      ),
+      petRepository.create(
+        makePetData({ IBGECode: cityIBGECode, lifeStage: 'senior' }),
+      ),
+    ])
+
+    const response = await sut.execute({
+      filters: {
+        IBGECode: cityIBGECode,
+        lifeStage: 'junior',
+      },
+    })
+
+    console.log({
+      pets: createdPets.filter((pet) => pet.lifeStage === 'junior'),
+      response,
+    })
+
+    expect(response.length).toBe(1)
+    expect(response).toEqual(
+      expect.arrayContaining(
+        createdPets.filter((pet) => pet.lifeStage === 'junior'),
       ),
     )
   })
