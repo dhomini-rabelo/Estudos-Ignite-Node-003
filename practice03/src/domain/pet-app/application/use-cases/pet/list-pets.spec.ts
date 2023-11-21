@@ -147,6 +147,7 @@ describe('List pets', () => {
       ),
     )
   })
+
   it('should filter pets by IBGECode, lifeStage, energyLevel, size and independenceLevel', async () => {
     const cityIBGECode = some.text()
     const createdPets = await Promise.all([
@@ -168,6 +169,33 @@ describe('List pets', () => {
           independenceLevel: 'small',
         }),
       ),
+      petRepository.create(
+        makePetData({
+          IBGECode: cityIBGECode,
+          lifeStage: 'junior',
+          energyLevel: 'small',
+          size: 'small',
+          independenceLevel: 'small',
+        }),
+      ),
+      petRepository.create(
+        makePetData({
+          IBGECode: cityIBGECode,
+          lifeStage: 'junior',
+          energyLevel: 'small',
+          size: 'medium',
+          independenceLevel: 'small',
+        }),
+      ),
+      petRepository.create(
+        makePetData({
+          IBGECode: cityIBGECode,
+          lifeStage: 'junior',
+          energyLevel: 'large',
+          size: 'small',
+          independenceLevel: 'large',
+        }),
+      ),
     ])
 
     const response = await sut.execute({
@@ -180,7 +208,7 @@ describe('List pets', () => {
       },
     })
 
-    expect(response.length).toBe(1)
+    expect(response.length).toBe(2)
     expect(response).toEqual(
       expect.arrayContaining(
         createdPets.filter(
