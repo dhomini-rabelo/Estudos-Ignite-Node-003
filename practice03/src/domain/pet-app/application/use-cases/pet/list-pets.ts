@@ -1,10 +1,18 @@
 import { IPetProps, Pet } from '@/domain/pet-app/enterprise/entities/pet'
 import { IBaseUseCase } from '../../core/use-cases/base'
 import { IPetRepository } from '@/domain/pet-app/ports/database/repositories/pet'
-import { Mandatory } from 'types'
+
+type IPetItemData = Omit<
+  IPetProps,
+  'description' | 'environmentSize' | 'institutionId' | 'IBGECode'
+>
+
+interface IFilters extends Partial<Omit<IPetItemData, 'name' | 'animalType'>> {
+  IBGECode: string
+}
 
 interface IRequest {
-  filters: Mandatory<Partial<IPetProps>, 'IBGECode'>
+  filters: IFilters
 }
 
 export class ListPetsUseCase implements IBaseUseCase {
