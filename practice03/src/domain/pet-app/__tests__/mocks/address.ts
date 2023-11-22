@@ -2,7 +2,7 @@ import { some } from '@tests/utils/some'
 import { IAddress } from '../../enterprise/value-objects/address'
 import { IAddressGenerator } from '../../ports/address/contracts'
 
-export class MockAddressGenerator implements IAddressGenerator {
+export class AddressGeneratorMock implements IAddressGenerator {
   async fromZipCode(zipCode: string): Promise<IAddress> {
     return {
       zipCode,

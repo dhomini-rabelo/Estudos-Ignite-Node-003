@@ -1,18 +1,22 @@
 import { InMemoryInstitutionRepository } from '@/domain/pet-app/__tests__/repositories/institution'
 import { CreateInstitutionUseCase } from './create-institution'
-import { MockAddressGenerator } from '@/domain/pet-app/__tests__/mocks/address'
+import { AddressGeneratorMock } from '@/domain/pet-app/__tests__/mocks/address'
 import { some } from '@tests/utils/some'
 import { HashMock } from '@/domain/pet-app/__tests__/mocks/hash'
 
 describe('Create a institution', () => {
   const institutionRepository = new InMemoryInstitutionRepository()
-  const mockAddressGenerator = new MockAddressGenerator()
+  const addressGeneratorMock = new AddressGeneratorMock()
   const hashMock = new HashMock()
   const sut = new CreateInstitutionUseCase(
     institutionRepository,
-    mockAddressGenerator,
+    addressGeneratorMock,
     hashMock,
   )
+
+  beforeEach(async () => {
+    await institutionRepository.reset()
+  })
 
   it('should create a institution', async () => {
     const response = await sut.execute({
