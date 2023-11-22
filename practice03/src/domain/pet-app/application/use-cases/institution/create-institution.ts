@@ -15,7 +15,7 @@ export class CreateInstitutionUseCase implements IBaseUseCase {
   constructor(
     private institutionRepository: IInstitutionRepository,
     private addressGenerator: IAddressGenerator,
-  ) { }
+  ) {}
 
   async execute(request: IRequest): Promise<Institution> {
     return this.institutionRepository.create({

@@ -4,16 +4,31 @@ import { Address } from '../value-objects/address'
 
 export interface IInstitutionProps {
   name: string
+  email: string
+  cellNumber: string
+  password: string
   address: Address
 }
 
 export class Institution extends IEntity<IInstitutionProps> {
-  get address() {
-    return this.props.address
-  }
-
   get name() {
     return this.props.name
+  }
+
+  get email() {
+    return this.props.email
+  }
+
+  get cellNumber() {
+    return this.props.cellNumber
+  }
+
+  get password() {
+    return this.props.password
+  }
+
+  get address() {
+    return this.props.address
   }
 
   static create(props: IInstitutionProps) {

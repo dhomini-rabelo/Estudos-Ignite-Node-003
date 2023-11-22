@@ -14,6 +14,9 @@ describe('Create a institution', () => {
     const response = await sut.execute({
       name: 'test',
       zipCode: '12345-780',
+      cellNumber: '(99) 99999999',
+      email: 'test@test.com',
+      password: 'xxxx',
     })
     expect(response.id.toString()).toEqual(expect.any(String))
     expect(
