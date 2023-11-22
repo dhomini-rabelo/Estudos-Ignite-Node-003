@@ -26,6 +26,14 @@ export class InMemoryInstitutionRepository implements IInstitutionRepository {
     return itemsFound[0]
   }
 
+  async findUniqueByEmail(email: string) {
+    const itemsFound = this.items.filter((item) => item.email === email)
+    if (itemsFound.length > 1) {
+      throw new ResourceRepeated()
+    }
+    return itemsFound.length === 1 ? itemsFound[0] : null
+  }
+
   async reset() {
     this.items = []
   }

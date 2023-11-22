@@ -4,10 +4,16 @@ import { IInstitutionProps } from '../../enterprise/entities/institution'
 
 export function makeInstitutionData({
   name = some.text(),
+  cellNumber = some.text(),
+  email = some.text(),
+  password = some.text(),
   address,
-}: Partial<IInstitutionProps> = {}) {
+}: Partial<IInstitutionProps> = {}): IInstitutionProps {
   return {
     name,
+    cellNumber,
+    email,
+    password,
     address:
       address ||
       new Address({
