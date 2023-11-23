@@ -3,7 +3,7 @@ import { ReadPetUseCase } from './read'
 import { makePetData } from '@/domain/pet-app/__tests__/factories/pet'
 import { Pet } from '@/domain/pet-app/enterprise/entities/pet'
 
-describe('Read a pet data', () => {
+describe('ReadPetUseCase', () => {
   const petRepository = new InMemoryPetRepository()
   const sut = new ReadPetUseCase(petRepository)
 

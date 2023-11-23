@@ -3,7 +3,7 @@ import { ListPetsUseCase } from './list'
 import { makePetData } from '@/domain/pet-app/__tests__/factories/pet'
 import { some } from '@tests/utils/some'
 
-describe('List pets', () => {
+describe('ListPetsUseCase', () => {
   const petRepository = new InMemoryPetRepository()
   const sut = new ListPetsUseCase(petRepository)
 

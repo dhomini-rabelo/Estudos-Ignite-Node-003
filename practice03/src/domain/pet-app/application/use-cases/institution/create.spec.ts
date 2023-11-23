@@ -4,7 +4,7 @@ import { AddressGeneratorMock } from '@/domain/pet-app/__tests__/mocks/address'
 import { some } from '@tests/utils/some'
 import { HashMock } from '@/domain/pet-app/__tests__/mocks/hash'
 
-describe('Create a institution', () => {
+describe('CreateInstitutionUseCase', () => {
   const institutionRepository = new InMemoryInstitutionRepository()
   const addressGeneratorMock = new AddressGeneratorMock()
   const hashMock = new HashMock()

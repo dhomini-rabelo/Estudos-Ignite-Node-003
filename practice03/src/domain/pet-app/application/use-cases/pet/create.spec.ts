@@ -6,7 +6,7 @@ import { ResourceNotFoundError } from '@/domain/pet-app/ports/database/errors/re
 import { ID } from '@/domain/pet-app/enterprise/core/entities/id'
 import { makePetData } from '@/domain/pet-app/__tests__/factories/pet'
 
-describe('Create a pet', () => {
+describe('CreatePetUseCase', () => {
   const petRepository = new InMemoryPetRepository()
   const institutionRepository = new InMemoryInstitutionRepository()
   const sut = new CreatePetUseCase(petRepository, institutionRepository)
