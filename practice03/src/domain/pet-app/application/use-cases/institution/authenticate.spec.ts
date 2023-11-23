@@ -6,6 +6,7 @@ import { some } from '@tests/utils/some'
 import { InvalidCredentialsError } from '../../core/errors/invalid-credentials'
 
 describe('AuthenticateInstitutionUseCase', () => {
+  const JWT_TOKEN_REGEX = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/
   const institutionRepository = new InMemoryInstitutionRepository()
   const hashMock = new HashMock()
   const sut = new AuthenticateInstitutionUseCase(
@@ -28,6 +29,19 @@ describe('AuthenticateInstitutionUseCase', () => {
     })
 
     expect(response).toEqual({ accessToken: expect.any(String) })
+  })
+
+  it('should generate a access token with JWT format', async () => {
+    const institution = await institutionRepository.create(
+      makeInstitutionData(),
+    )
+
+    const response = await sut.execute({
+      email: institution.email,
+      password: institution.password,
+    })
+
+    expect(JWT_TOKEN_REGEX.test(response.accessToken)).toBeTruthy()
   })
 
   it('should throw InvalidCredentialsError for nonexistent email', async () => {
