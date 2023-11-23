@@ -1,6 +1,7 @@
 import { some } from '@tests/utils/some'
 import { Address } from '../../enterprise/value-objects/address'
 import { IInstitutionProps } from '../../enterprise/entities/institution'
+import { IInstitutionRepository } from '../../ports/database/repositories/institution'
 
 export function makeInstitutionData({
   name = some.text(),
@@ -23,5 +24,13 @@ export function makeInstitutionData({
         state: some.text(),
         zipCode: some.text(),
       }),
+  }
+}
+
+export class InstitutionFactory {
+  constructor(private institutionRepository: IInstitutionRepository) {}
+
+  async make(data: Partial<IInstitutionProps> = {}) {
+    return this.institutionRepository.create(makeInstitutionData(data))
   }
 }
