@@ -1,3 +1,3 @@
 export interface IBaseUseCase {
-  execute(...args: any[]): Promise<any>
+  execute(request: any): Promise<any>
 }
