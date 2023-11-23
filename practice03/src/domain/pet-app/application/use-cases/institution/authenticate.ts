@@ -2,6 +2,7 @@ import { IInstitutionRepository } from '@/domain/pet-app/ports/database/reposito
 import { IBaseUseCase } from '../../core/use-cases/base'
 import { IHash } from '@/domain/pet-app/ports/hash/contract'
 import { InvalidCredentialsError } from '../../core/errors/invalid-credentials'
+import { IJWT } from '@/domain/pet-app/ports/jwt/contract'
 
 interface IRequest {
   email: string
@@ -16,6 +17,7 @@ export class AuthenticateInstitutionUseCase implements IBaseUseCase {
   constructor(
     private institutionRepository: IInstitutionRepository,
     private hash: IHash,
+    private jwt: IJWT,
   ) {}
 
   async execute(request: IRequest): Promise<IResponse> {
@@ -28,8 +30,7 @@ export class AuthenticateInstitutionUseCase implements IBaseUseCase {
       this.passwordIsCorrect(request.password, institution.password)
     ) {
       return {
-        accessToken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        accessToken: this.jwt.generateToken(institution.id.toString()),
       }
     }
 

@@ -4,14 +4,17 @@ import { AuthenticateInstitutionUseCase } from './authenticate'
 import { makeInstitutionData } from '@/domain/pet-app/__tests__/factories/institution'
 import { some } from '@tests/utils/some'
 import { InvalidCredentialsError } from '../../core/errors/invalid-credentials'
+import { JWTMock } from '@/domain/pet-app/__tests__/mocks/jwt'
 
 describe('AuthenticateInstitutionUseCase', () => {
   const JWT_TOKEN_REGEX = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/
   const institutionRepository = new InMemoryInstitutionRepository()
   const hashMock = new HashMock()
+  const jwtMock = new JWTMock()
   const sut = new AuthenticateInstitutionUseCase(
     institutionRepository,
     hashMock,
+    jwtMock,
   )
 
   beforeEach(async () => {
@@ -42,6 +45,24 @@ describe('AuthenticateInstitutionUseCase', () => {
     })
 
     expect(JWT_TOKEN_REGEX.test(response.accessToken)).toBeTruthy()
+  })
+
+  it('should generate a different access token for each run', async () => {
+    const institution = await institutionRepository.create(
+      makeInstitutionData(),
+    )
+
+    const firstResponse = await sut.execute({
+      email: institution.email,
+      password: institution.password,
+    })
+
+    const secondResponse = await sut.execute({
+      email: institution.email,
+      password: institution.password,
+    })
+
+    expect(firstResponse.accessToken).not.toBe(secondResponse.accessToken)
   })
 
   it('should throw InvalidCredentialsError for nonexistent email', async () => {
