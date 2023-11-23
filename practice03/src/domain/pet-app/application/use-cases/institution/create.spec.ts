@@ -1,5 +1,5 @@
 import { InMemoryInstitutionRepository } from '@/domain/pet-app/__tests__/repositories/institution'
-import { CreateInstitutionUseCase } from './create-institution'
+import { CreateInstitutionUseCase } from './create'
 import { AddressGeneratorMock } from '@/domain/pet-app/__tests__/mocks/address'
 import { some } from '@tests/utils/some'
 import { HashMock } from '@/domain/pet-app/__tests__/mocks/hash'

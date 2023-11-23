@@ -1,5 +1,5 @@
 import { InMemoryPetRepository } from '@/domain/pet-app/__tests__/repositories/pet'
-import { ListPetsUseCase } from './list-pets'
+import { ListPetsUseCase } from './list'
 import { makePetData } from '@/domain/pet-app/__tests__/factories/pet'
 import { some } from '@tests/utils/some'
 

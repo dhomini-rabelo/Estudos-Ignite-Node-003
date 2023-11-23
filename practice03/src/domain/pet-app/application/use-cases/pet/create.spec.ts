@@ -1,5 +1,5 @@
 import { InMemoryPetRepository } from '@/domain/pet-app/__tests__/repositories/pet'
-import { CreatePetUseCase } from './create-pet'
+import { CreatePetUseCase } from './create'
 import { InMemoryInstitutionRepository } from '@/domain/pet-app/__tests__/repositories/institution'
 import { makeInstitutionData } from '@/domain/pet-app/__tests__/factories/institution'
 import { ResourceNotFoundError } from '@/domain/pet-app/ports/database/errors/resource-not-found'

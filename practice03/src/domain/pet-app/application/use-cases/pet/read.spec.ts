@@ -1,5 +1,5 @@
 import { InMemoryPetRepository } from '@/domain/pet-app/__tests__/repositories/pet'
-import { ReadPetUseCase } from './read-pet'
+import { ReadPetUseCase } from './read'
 import { makePetData } from '@/domain/pet-app/__tests__/factories/pet'
 import { Pet } from '@/domain/pet-app/enterprise/entities/pet'
 
