@@ -1,6 +1,6 @@
 import { ID } from './id'
 
-export abstract class IEntity<Props extends object> {
+export abstract class IEntity<Props extends Record<string, any>> {
   private _id: ID
   protected props: Props
 
@@ -14,8 +14,6 @@ export abstract class IEntity<Props extends object> {
   }
 
   public getProp(propName: string) {
-    // eslint-disable-next-line
-    // @ts-ignore
     return this.props[propName]
   }
 
