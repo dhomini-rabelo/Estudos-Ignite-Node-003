@@ -1,11 +1,8 @@
-import {
-  IInstitutionProps,
-  Institution,
-} from '../../../enterprise/entities/institution'
+import { Institution } from '../../../enterprise/entities/institution'
+import { IRepository } from './base'
 
-export interface IInstitutionRepository {
-  create(props: IInstitutionProps): Promise<Institution>
+export interface IInstitutionRepository<Entity, Props>
+  extends IRepository<Entity, Props> {
   findUniqueByEmail(id: string): Promise<Institution | null>
   findUniqueById(id: string): Promise<Institution>
-  reset(): Promise<void>
 }

@@ -5,7 +5,7 @@ import {
   Institution,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/institution'
 import { Address } from '@/domain/bounded-contexts/pet-app/enterprise/value-objects/address'
-import { IAddressGenerator } from '@/domain/bounded-contexts/pet-app/ports/address/contracts'
+import { IAddressGenerator } from '@/domain/bounded-contexts/pet-app/ports/address/contract'
 import { IHash } from '@/domain/bounded-contexts/pet-app/ports/hash/contract'
 
 interface IRequest extends Omit<IInstitutionProps, 'address'> {

@@ -1,8 +1,7 @@
-import { IPetProps, Pet } from '../../../enterprise/entities/pet'
+import { Pet } from '../../../enterprise/entities/pet'
+import { IRepository } from './base'
 
-export interface IPetRepository {
-  create(props: IPetProps): Promise<Pet>
+export interface IPetRepository<Entity, Props>
+  extends IRepository<Entity, Props> {
   findUniqueById(id: string): Promise<Pet>
-  findMany(params: Partial<IPetProps>): Promise<Pet[]>
-  reset(): Promise<void>
 }
