@@ -1,8 +1,10 @@
-export interface IRepository<Entity, Props> {
+import { WithID } from '@/domain/core/entities/types'
+
+export interface IRepository<Entity, Props extends Record<string, any>> {
   create(props: Props): Promise<Entity>
-  get(props: Partial<Props>): Promise<Entity>
-  findUnique(props: Partial<Props>): Promise<Entity | null>
-  findFirst(props: Partial<Props>): Promise<Entity | null>
-  findMany(params: Partial<Props>): Promise<Entity[]>
+  get(props: Partial<WithID<Props>>): Promise<Entity>
+  findUnique(props: Partial<WithID<Props>>): Promise<Entity | null>
+  findFirst(props: Partial<WithID<Props>>): Promise<Entity | null>
+  findMany(params: Partial<WithID<Props>>): Promise<Entity[]>
   reset(): Promise<void>
 }
