@@ -1,5 +1,5 @@
 import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/institution'
-import { IBaseUseCase } from '../../core/use-cases/base'
+import { IBaseUseCase } from '../../../../../core/use-cases/base'
 import {
   IInstitutionProps,
   Institution,

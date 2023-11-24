@@ -1,4 +1,4 @@
-import { ID } from '../../enterprise/core/entities/id'
+import { ID } from '../../../../core/entities/id'
 import { IPetProps, Pet } from '../../enterprise/entities/pet'
 import { ResourceNotFoundError } from '../../ports/database/errors/resource-not-found'
 import { ResourceRepeated } from '../../ports/database/errors/resource-repeated'

@@ -1,4 +1,4 @@
-import { ID } from '../../enterprise/core/entities/id'
+import { ID } from '../../../../core/entities/id'
 import {
   IInstitutionProps,
   Institution,

@@ -1,6 +1,6 @@
 import { some } from '@tests/utils/some'
 import { IPetProps } from '../../enterprise/entities/pet'
-import { ID } from '../../enterprise/core/entities/id'
+import { ID } from '../../../../core/entities/id'
 
 export function makePetData({
   name = some.text(),

@@ -27,5 +27,5 @@ export class Address {
     return this.value.number
   }
 
-  constructor(private value: IAddress) { }
+  constructor(private value: IAddress) {}
 }

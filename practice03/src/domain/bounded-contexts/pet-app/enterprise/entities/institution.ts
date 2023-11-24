@@ -1,5 +1,5 @@
-import { IEntity } from '../core/entities/base'
-import { ID } from '../core/entities/id'
+import { IEntity } from '../../../../core/entities/base'
+import { ID } from '../../../../core/entities/id'
 import { Address } from '../value-objects/address'
 
 export interface IInstitutionProps {
