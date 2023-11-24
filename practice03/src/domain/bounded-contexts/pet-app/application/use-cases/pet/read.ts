@@ -1,6 +1,6 @@
-import { Pet } from '@/domain/pet-app/enterprise/entities/pet'
+import { Pet } from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
 import { IBaseUseCase } from '../../core/use-cases/base'
-import { IPetRepository } from '@/domain/pet-app/ports/database/repositories/pet'
+import { IPetRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/pet'
 
 export class ReadPetUseCase implements IBaseUseCase {
   constructor(private petRepository: IPetRepository) {}

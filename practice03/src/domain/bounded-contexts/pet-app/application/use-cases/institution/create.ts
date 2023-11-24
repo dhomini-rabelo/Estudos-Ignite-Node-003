@@ -1,12 +1,12 @@
-import { IInstitutionRepository } from '@/domain/pet-app/ports/database/repositories/institution'
+import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/institution'
 import { IBaseUseCase } from '../../core/use-cases/base'
 import {
   IInstitutionProps,
   Institution,
-} from '@/domain/pet-app/enterprise/entities/institution'
-import { Address } from '@/domain/pet-app/enterprise/value-objects/address'
-import { IAddressGenerator } from '@/domain/pet-app/ports/address/contracts'
-import { IHash } from '@/domain/pet-app/ports/hash/contract'
+} from '@/domain/bounded-contexts/pet-app/enterprise/entities/institution'
+import { Address } from '@/domain/bounded-contexts/pet-app/enterprise/value-objects/address'
+import { IAddressGenerator } from '@/domain/bounded-contexts/pet-app/ports/address/contracts'
+import { IHash } from '@/domain/bounded-contexts/pet-app/ports/hash/contract'
 
 interface IRequest extends Omit<IInstitutionProps, 'address'> {
   zipCode: string

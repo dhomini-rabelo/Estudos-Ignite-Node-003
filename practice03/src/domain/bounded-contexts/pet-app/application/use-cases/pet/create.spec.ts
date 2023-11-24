@@ -1,10 +1,10 @@
-import { InMemoryPetRepository } from '@/domain/pet-app/__tests__/repositories/pet'
+import { InMemoryPetRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/pet'
 import { CreatePetUseCase } from './create'
-import { InMemoryInstitutionRepository } from '@/domain/pet-app/__tests__/repositories/institution'
-import { makeInstitutionData } from '@/domain/pet-app/__tests__/factories/institution'
-import { ResourceNotFoundError } from '@/domain/pet-app/ports/database/errors/resource-not-found'
-import { ID } from '@/domain/pet-app/enterprise/core/entities/id'
-import { makePetData } from '@/domain/pet-app/__tests__/factories/pet'
+import { InMemoryInstitutionRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/institution'
+import { makeInstitutionData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
+import { ResourceNotFoundError } from '@/domain/bounded-contexts/pet-app/ports/database/errors/resource-not-found'
+import { ID } from '@/domain/bounded-contexts/pet-app/enterprise/core/entities/id'
+import { makePetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
 
 describe('CreatePetUseCase', () => {
   const petRepository = new InMemoryPetRepository()

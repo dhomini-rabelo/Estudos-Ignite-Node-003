@@ -1,6 +1,9 @@
-import { IPetProps, Pet } from '@/domain/pet-app/enterprise/entities/pet'
+import {
+  IPetProps,
+  Pet,
+} from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
 import { IBaseUseCase } from '../../core/use-cases/base'
-import { IPetRepository } from '@/domain/pet-app/ports/database/repositories/pet'
+import { IPetRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/pet'
 
 type IPetItemData = Omit<
   IPetProps,
