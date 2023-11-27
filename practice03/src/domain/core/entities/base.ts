@@ -14,7 +14,10 @@ export abstract class IEntity<Props extends Record<string, any>> {
   }
 
   public getProp(propName: string) {
-    return this.props[propName]
+    return {
+      ...this.props,
+      id: this._id,
+    }[propName]
   }
 
   public isEqual(entity: IEntity<object>) {
