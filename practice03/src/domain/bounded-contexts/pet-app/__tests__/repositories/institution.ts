@@ -6,9 +6,13 @@ import {
 import { ResourceNotFoundError } from '../../ports/database/errors/resource-not-found'
 import { ResourceRepeated } from '../../ports/database/errors/resource-repeated'
 import { IInstitutionRepository } from '../../ports/database/repositories/institution'
+import { IInMemoryRepository } from './base'
 
-export class InMemoryInstitutionRepository implements IInstitutionRepository {
-  private items: Institution[] = []
+export class InMemoryInstitutionRepository
+  extends IInMemoryRepository<Institution, IInstitutionProps>
+  implements IInstitutionRepository
+{
+  protected entity = Institution
 
   async create(props: IInstitutionProps) {
     const newInstitution = Institution.create(props)
@@ -32,9 +36,5 @@ export class InMemoryInstitutionRepository implements IInstitutionRepository {
       throw new ResourceRepeated()
     }
     return itemsFound.length === 1 ? itemsFound[0] : null
-  }
-
-  async reset() {
-    this.items = []
   }
 }
