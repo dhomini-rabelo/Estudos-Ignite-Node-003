@@ -28,9 +28,7 @@ describe('CreateInstitutionUseCase', () => {
     })
     expect(response.id.toString()).toEqual(expect.any(String))
     expect(
-      (
-        await institutionRepository.findUniqueById(response.id.toString())
-      ).isEqual(response),
+      (await institutionRepository.get({ id: response.id })).isEqual(response),
     ).toBeTruthy()
   })
 

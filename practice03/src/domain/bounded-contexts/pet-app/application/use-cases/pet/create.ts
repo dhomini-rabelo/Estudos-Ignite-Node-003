@@ -13,9 +13,9 @@ export class CreatePetUseCase implements IBaseUseCase {
   ) {}
 
   async execute(request: Omit<IPetProps, 'IBGECode'>): Promise<Pet> {
-    const institution = await this.institutionRepository.findUniqueById(
-      request.institutionId.toValue(),
-    )
+    const institution = await this.institutionRepository.get({
+      id: request.institutionId,
+    })
     return this.petRepository.create({
       ...request,
       IBGECode: institution.address.IBGECode,
