@@ -27,9 +27,7 @@ describe('CreatePetUseCase', () => {
 
     expect(response.id.toString()).toEqual(expect.any(String))
     expect(
-      (await petRepository.findUniqueById(response.id.toString())).isEqual(
-        response,
-      ),
+      (await petRepository.get({ id: response.id })).isEqual(response),
     ).toBeTruthy()
   })
 
