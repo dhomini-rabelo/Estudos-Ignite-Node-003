@@ -4,7 +4,4 @@ import {
 } from '../../../enterprise/entities/institution'
 import { IRepository } from './base'
 
-export interface IInstitutionRepository
-  extends IRepository<Institution, IInstitutionProps> {
-  findUniqueByEmail(id: string): Promise<Institution | null>
-}
+export type IInstitutionRepository = IRepository<Institution, IInstitutionProps>

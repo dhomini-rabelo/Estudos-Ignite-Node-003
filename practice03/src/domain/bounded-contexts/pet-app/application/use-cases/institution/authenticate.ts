@@ -21,9 +21,9 @@ export class AuthenticateInstitutionUseCase implements IBaseUseCase {
   ) {}
 
   async execute(request: IRequest): Promise<IResponse> {
-    const institution = await this.institutionRepository.findUniqueByEmail(
-      request.email,
-    )
+    const institution = await this.institutionRepository.findUnique({
+      email: request.email,
+    })
 
     if (
       institution &&
