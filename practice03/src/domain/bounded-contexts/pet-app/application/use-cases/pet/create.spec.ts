@@ -51,4 +51,12 @@ describe('CreatePetUseCase', () => {
       }).rejects.toThrow(ResourceNotFoundError)
     })
   })
+
+  describe('Data Validation', () => {
+    it('should throw ValidationError when data are invalid', async () => {
+      await expect(async () => {
+        await sut.execute({} as any)
+      }).rejects.toThrow(ValidationError)
+    })
+  })
 })
