@@ -7,7 +7,7 @@ import { IPetRepository } from '@/domain/bounded-contexts/pet-app/ports/database
 import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/institution'
 import * as zod from 'zod'
 import { ErrorMessages } from '../../core/errors/validation-error/messages'
-import { ValidationError } from '../../core/errors/validation-error/error'
+import { adaptZodSchema } from '../../adapters/zod'
 
 export class CreatePetUseCase implements IBaseUseCase {
   constructor(
@@ -26,7 +26,7 @@ export class CreatePetUseCase implements IBaseUseCase {
     })
   }
 
-  private validate(data: unknown) {
+  private validate(data: Record<string, any>) {
     const schema = zod.object({
       name: zod.string({
         required_error: ErrorMessages.REQUIRED,
@@ -35,10 +35,6 @@ export class CreatePetUseCase implements IBaseUseCase {
       // .min(3, DynamicErrors.minLength(3))
     })
 
-    try {
-      return schema.parse(data)
-    } catch {
-      throw new ValidationError()
-    }
+    return adaptZodSchema(schema, data)
   }
 }
