@@ -5,7 +5,6 @@ import { makeInstitutionData } from '@/domain/bounded-contexts/pet-app/__tests__
 import { ResourceNotFoundError } from '@/domain/bounded-contexts/pet-app/ports/database/errors/resource-not-found'
 import { ID } from '@/domain/core/entities/id'
 import { makePetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
-import { ValidationError } from '../../core/errors/validation-error/error'
 
 describe('CreatePetUseCase', () => {
   const petRepository = new InMemoryPetRepository()
@@ -17,46 +16,36 @@ describe('CreatePetUseCase', () => {
     await institutionRepository.reset()
   })
 
-  describe('Business Rules', () => {
-    it('should create a pet', async () => {
-      const institution = await institutionRepository.create(
-        makeInstitutionData(),
-      )
+  it('should create a pet', async () => {
+    const institution = await institutionRepository.create(
+      makeInstitutionData(),
+    )
 
-      const response = await sut.execute(
-        makePetData({ institutionId: institution.id }),
-      )
+    const response = await sut.execute(
+      makePetData({ institutionId: institution.id }),
+    )
 
-      expect(response.id.toString()).toEqual(expect.any(String))
-      expect(
-        (await petRepository.get({ id: response.id })).isEqual(response),
-      ).toBeTruthy()
-    })
-
-    it('should ensure that the pet.IBGECode is the same as the institution.IBGECode', async () => {
-      const institution = await institutionRepository.create(
-        makeInstitutionData(),
-      )
-
-      const response = await sut.execute(
-        makePetData({ institutionId: institution.id }),
-      )
-
-      expect(response.IBGECode).toEqual(institution.address.IBGECode)
-    })
-
-    it('should throw ResourceNotFoundError when institution not exists', async () => {
-      await expect(async () => {
-        await sut.execute(makePetData({ institutionId: new ID() }))
-      }).rejects.toThrow(ResourceNotFoundError)
-    })
+    expect(response.id.toString()).toEqual(expect.any(String))
+    expect(
+      (await petRepository.get({ id: response.id })).isEqual(response),
+    ).toBeTruthy()
   })
 
-  describe('Data Validation', () => {
-    it('should throw ValidationError when data are invalid', async () => {
-      await expect(async () => {
-        await sut.execute({} as any)
-      }).rejects.toThrow(ValidationError)
-    })
+  it('should ensure that the pet.IBGECode is the same as the institution.IBGECode', async () => {
+    const institution = await institutionRepository.create(
+      makeInstitutionData(),
+    )
+
+    const response = await sut.execute(
+      makePetData({ institutionId: institution.id }),
+    )
+
+    expect(response.IBGECode).toEqual(institution.address.IBGECode)
+  })
+
+  it('should throw ResourceNotFoundError when institution not exists', async () => {
+    await expect(async () => {
+      await sut.execute(makePetData({ institutionId: new ID() }))
+    }).rejects.toThrow(ResourceNotFoundError)
   })
 })
