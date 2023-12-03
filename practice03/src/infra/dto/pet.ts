@@ -1,4 +1,4 @@
-import { ErrorMessages } from '@/domain/bounded-contexts/pet-app/application/core/errors/validation-error/messages'
+import { ErrorMessages } from '@/domain/bounded-contexts/pet-app/application/errors/validation-error/messages'
 import * as zod from 'zod'
 
 export const PetDTO = zod.object({
