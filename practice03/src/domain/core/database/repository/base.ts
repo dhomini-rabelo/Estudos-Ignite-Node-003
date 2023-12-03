@@ -1,9 +1,9 @@
 import { WithID } from '@/domain/core/entities/types'
-import { ID } from '../../../../core/entities/id'
-import { ResourceNotFoundError } from '../../ports/database/errors/resource-not-found'
-import { ResourceRepeated } from '../../ports/database/errors/resource-repeated'
+import { ID } from '../../entities/id'
+import { ResourceNotFoundError } from '../../../bounded-contexts/pet-app/ports/database/errors/resource-not-found'
+import { ResourceRepeated } from '../../../bounded-contexts/pet-app/ports/database/errors/resource-repeated'
 import { IEntity } from '@/domain/core/entities/base'
-import { IRepository } from '../../ports/database/repositories/base'
+import { IRepository } from '../../../bounded-contexts/pet-app/ports/database/repositories/base'
 import { EmptyRecord } from 'types/simple'
 
 export abstract class IInMemoryRepository<
