@@ -1,5 +1,5 @@
 import * as zod from 'zod'
-import { ValidationError } from '../errors/validation-error/error'
+import { ValidationError } from '../use-cases/errors/validation-error/error'
 import { EmptyRecord } from 'types/simple'
 
 export function adaptZodSchema<ISchema extends zod.ZodType>(

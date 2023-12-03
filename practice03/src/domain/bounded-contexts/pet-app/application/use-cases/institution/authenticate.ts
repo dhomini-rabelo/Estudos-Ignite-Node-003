@@ -1,7 +1,7 @@
 import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/institution'
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
 import { IHash } from '@/adapters/hash/contract'
-import { InvalidCredentialsError } from '../../errors/invalid-credentials'
+import { InvalidCredentialsError } from '../../../../../core/use-cases/errors/invalid-credentials'
 import { IJWT } from '@/adapters/jwt/contract'
 
 interface IRequest {
