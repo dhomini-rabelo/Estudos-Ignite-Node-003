@@ -1,7 +1,7 @@
 import { some } from '@tests/utils/some'
 import { Address } from '../../enterprise/value-objects/address'
 import { IInstitutionProps } from '../../enterprise/entities/institution'
-import { IInstitutionRepository } from '../../ports/database/repositories/institution'
+import { IInstitutionRepository } from '../../application/repositories/institution'
 
 export function makeInstitutionData({
   name = some.text(),

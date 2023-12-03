@@ -1,10 +1,18 @@
-import { WithID } from '@/domain/core/entities/types'
 import { ID } from '../../../entities/id'
-import { ResourceNotFoundError } from '../../../../bounded-contexts/pet-app/ports/database/errors/resource-not-found'
-import { ResourceRepeated } from '../../../../bounded-contexts/pet-app/ports/database/errors/resource-repeated'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
+import { ResourceRepeated } from '../errors/resource-repeated'
 import { IEntity } from '@/domain/core/entities/base'
-import { IRepository } from '../../../../bounded-contexts/pet-app/ports/database/repositories/base'
+import { WithID } from '@/domain/core/entities/types'
 import { EmptyRecord } from 'types/simple'
+
+export interface IRepository<Entity, Props extends EmptyRecord> {
+  create(props: Props): Promise<Entity>
+  get(props: Partial<WithID<Props>>): Promise<Entity>
+  findUnique(props: Partial<WithID<Props>>): Promise<Entity | null>
+  findFirst(props: Partial<WithID<Props>>): Promise<Entity | null>
+  findMany(params: Partial<WithID<Props>>): Promise<Entity[]>
+  reset(): Promise<void>
+}
 
 export abstract class IInMemoryRepository<
   Entity extends IEntity<any>,

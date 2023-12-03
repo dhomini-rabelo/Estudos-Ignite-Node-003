@@ -3,7 +3,7 @@ import {
   Pet,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
-import { IPetRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/pet'
+import { IPetRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/pet'
 
 type IPetItemData = Omit<
   IPetProps,

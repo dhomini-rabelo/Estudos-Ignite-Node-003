@@ -2,7 +2,7 @@ import {
   IInstitutionProps,
   Institution,
 } from '../../enterprise/entities/institution'
-import { IInstitutionRepository } from '../../ports/database/repositories/institution'
+import { IInstitutionRepository } from '../../application/repositories/institution'
 import { IInMemoryRepository } from '../../../../core/adapters/database/repository/base'
 
 export class InMemoryInstitutionRepository

@@ -3,8 +3,8 @@ import {
   Pet,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
-import { IPetRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/pet'
-import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/ports/database/repositories/institution'
+import { IPetRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/pet'
+import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
 import { ID } from '@/domain/core/entities/id'
 
 interface IRequest extends Omit<IPetProps, 'IBGECode' | 'institutionId'> {
