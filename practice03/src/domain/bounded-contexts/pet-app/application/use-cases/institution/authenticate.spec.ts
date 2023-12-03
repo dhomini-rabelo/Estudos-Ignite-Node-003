@@ -20,17 +20,6 @@ describe('AuthenticateInstitutionUseCase', () => {
     await institutionRepository.reset()
   })
 
-  it('should generate a access token', async () => {
-    const institution = await institutionFactory.make()
-
-    const response = await sut.execute({
-      email: institution.email,
-      password: institution.password,
-    })
-
-    expect(response).toEqual({ accessToken: expect.any(String) })
-  })
-
   it('should generate a access token with JWT format', async () => {
     const institution = await institutionFactory.make()
 
@@ -53,6 +42,23 @@ describe('AuthenticateInstitutionUseCase', () => {
     const secondResponse = await sut.execute({
       email: institution.email,
       password: institution.password,
+    })
+
+    expect(firstResponse.accessToken).not.toBe(secondResponse.accessToken)
+  })
+
+  it('should generate a different access token for each run with institutions different', async () => {
+    const institutionA = await institutionFactory.make()
+    const institutionB = await institutionFactory.make()
+
+    const firstResponse = await sut.execute({
+      email: institutionA.email,
+      password: institutionA.password,
+    })
+
+    const secondResponse = await sut.execute({
+      email: institutionB.email,
+      password: institutionB.password,
     })
 
     expect(firstResponse.accessToken).not.toBe(secondResponse.accessToken)
