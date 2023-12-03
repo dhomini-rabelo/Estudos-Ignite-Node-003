@@ -5,8 +5,8 @@ import {
   Institution,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/institution'
 import { Address } from '@/domain/bounded-contexts/pet-app/enterprise/value-objects/address'
-import { IAddressGenerator } from '@/domain/bounded-contexts/pet-app/ports/address/contract'
-import { IHash } from '@/domain/bounded-contexts/pet-app/ports/hash/contract'
+import { IAddressGenerator } from '@/adapters/address/contract'
+import { IHash } from '@/adapters/hash/contract'
 
 interface IRequest extends Omit<IInstitutionProps, 'address'> {
   zipCode: string
