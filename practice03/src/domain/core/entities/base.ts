@@ -1,6 +1,7 @@
+import { EmptyRecord } from 'types/simple'
 import { ID } from './id'
 
-export abstract class IEntity<Props extends Record<string, any>> {
+export abstract class IEntity<Props extends EmptyRecord> {
   private _id: ID
   protected props: Props
 

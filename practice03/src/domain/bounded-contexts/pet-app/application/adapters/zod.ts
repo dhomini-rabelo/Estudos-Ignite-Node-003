@@ -1,9 +1,10 @@
 import * as zod from 'zod'
 import { ValidationError } from '../core/errors/validation-error/error'
+import { EmptyRecord } from 'types/simple'
 
 export function adaptZodSchema<ISchema extends zod.ZodType>(
   schemaObject: ISchema,
-  data: Record<string, any>,
+  data: EmptyRecord,
 ) {
   const validation = schemaObject.safeParse(data)
   if (!validation.success) {

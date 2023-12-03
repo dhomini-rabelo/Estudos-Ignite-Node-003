@@ -4,10 +4,11 @@ import { ResourceNotFoundError } from '../../ports/database/errors/resource-not-
 import { ResourceRepeated } from '../../ports/database/errors/resource-repeated'
 import { IEntity } from '@/domain/core/entities/base'
 import { IRepository } from '../../ports/database/repositories/base'
+import { EmptyRecord } from 'types/simple'
 
 export abstract class IInMemoryRepository<
   Entity extends IEntity<any>,
-  Props extends Record<string, any>,
+  Props extends EmptyRecord,
 > implements IRepository<Entity, Props>
 {
   protected items: Entity[] = []
