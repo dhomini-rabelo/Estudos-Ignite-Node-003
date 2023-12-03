@@ -3,7 +3,7 @@ import { HashMock } from '@tests/mocks/hash'
 import { AuthenticateInstitutionUseCase } from './authenticate'
 import { InstitutionFactory } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
 import { some } from '@tests/utils/some'
-import { InvalidCredentialsError } from '../../../../../core/use-cases/errors/invalid-credentials'
+import { InvalidCredentialsError } from '../../errors/invalid-credentials'
 import { JWTMock } from '@tests/mocks/jwt'
 
 describe('AuthenticateInstitutionUseCase', () => {
