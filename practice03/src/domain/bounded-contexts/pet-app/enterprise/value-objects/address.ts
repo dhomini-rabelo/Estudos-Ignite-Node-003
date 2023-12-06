@@ -2,7 +2,7 @@ export interface IAddress {
   zipCode: string
   IBGECode: string
   city: string
-  state: string
+  stateAcronym: string
   number: string
 }
 
@@ -19,13 +19,21 @@ export class Address {
     return this.value.city
   }
 
-  get state() {
-    return this.value.state
+  get stateAcronym() {
+    return this.value.stateAcronym
   }
 
   get number() {
     return this.value.number
   }
 
-  constructor(private value: IAddress) {}
+  private constructor(private value: IAddress) {}
+
+  static create(value: IAddress) {
+    return new Address(value)
+  }
+
+  static reference(value: IAddress) {
+    return new Address(value)
+  }
 }

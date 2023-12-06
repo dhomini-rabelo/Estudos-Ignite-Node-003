@@ -23,7 +23,7 @@ export class CreateInstitutionUseCase implements IBaseUseCase {
     return this.institutionRepository.create({
       ...request,
       password: this.hash.generate(request.password),
-      address: new Address(
+      address: Address.create(
         await this.addressGenerator.fromZipCode(request.zipCode),
       ),
     })

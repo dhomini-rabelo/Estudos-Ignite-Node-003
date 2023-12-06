@@ -17,11 +17,11 @@ export function makeInstitutionData({
     password,
     address:
       address ||
-      new Address({
+      Address.reference({
         city: some.text(),
         IBGECode: some.text(),
         number: some.text(),
-        state: some.text(),
+        stateAcronym: some.text(2),
         zipCode: some.text(),
       }),
   }
