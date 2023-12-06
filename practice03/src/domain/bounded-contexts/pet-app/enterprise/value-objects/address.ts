@@ -27,7 +27,9 @@ export class Address {
     return this.value.number
   }
 
-  private constructor(private value: IAddress) {}
+  private constructor(private value: IAddress) {
+    Object.freeze(this)
+  }
 
   static create(value: IAddress) {
     return new Address(value)

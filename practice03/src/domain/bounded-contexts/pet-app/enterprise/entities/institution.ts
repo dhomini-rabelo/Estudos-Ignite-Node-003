@@ -7,7 +7,7 @@ export interface IInstitutionProps {
   email: string
   cellNumber: string
   password: string
-  address: Address
+  readonly address: Address
 }
 
 export class Institution extends IEntity<IInstitutionProps> {
