@@ -21,7 +21,7 @@ describe('AuthenticateInstitutionUseCase', () => {
     await institutionRepository.reset()
   })
 
-  it.only('should generate a access token with JWT format', async () => {
+  it('should generate a access token with JWT format', async () => {
     const rawPassword = some.text()
     const institution = await institutionFactory.make({
       password: hash.generate(rawPassword),
@@ -35,33 +35,41 @@ describe('AuthenticateInstitutionUseCase', () => {
     expect(JWT_TOKEN_REGEX.test(response.accessToken)).toBeTruthy()
   })
 
-  it('should generate a different access token for each run', async () => {
-    const institution = await institutionFactory.make()
+  it('should generate a different access token for each run with the same institution', async () => {
+    const rawPassword = some.text()
+    const institution = await institutionFactory.make({
+      password: hash.generate(rawPassword),
+    })
 
     const firstResponse = await sut.execute({
       email: institution.email,
-      password: institution.password,
+      password: rawPassword,
     })
     const secondResponse = await sut.execute({
       email: institution.email,
-      password: institution.password,
+      password: rawPassword,
     })
 
     expect(firstResponse.accessToken).not.toBe(secondResponse.accessToken)
   })
 
   it('should generate a different access token for each run with institutions different', async () => {
-    const institutionA = await institutionFactory.make()
-    const institutionB = await institutionFactory.make()
+    const rawPasswordA = some.text()
+    const institutionA = await institutionFactory.make({
+      password: hash.generate(rawPasswordA),
+    })
+    const rawPasswordB = some.text()
+    const institutionB = await institutionFactory.make({
+      password: hash.generate(rawPasswordB),
+    })
 
     const firstResponse = await sut.execute({
       email: institutionA.email,
-      password: institutionA.password,
+      password: rawPasswordA,
     })
-
     const secondResponse = await sut.execute({
       email: institutionB.email,
-      password: institutionB.password,
+      password: rawPasswordB,
     })
 
     expect(firstResponse.accessToken).not.toBe(secondResponse.accessToken)
