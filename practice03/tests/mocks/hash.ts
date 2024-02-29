@@ -6,6 +6,6 @@ export class HashMock implements IHash {
   }
 
   compare(input: string, hash: string): boolean {
-    return input === hash.replace('///', '')
+    return this.generate(input) === hash
   }
 }

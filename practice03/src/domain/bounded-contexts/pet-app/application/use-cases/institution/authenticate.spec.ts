@@ -10,9 +10,10 @@ describe('AuthenticateInstitutionUseCase', () => {
   const JWT_TOKEN_REGEX = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/
   const institutionRepository = new InMemoryInstitutionRepository()
   const institutionFactory = new InstitutionFactory(institutionRepository)
+  const hash = new HashMock()
   const sut = new AuthenticateInstitutionUseCase(
     institutionRepository,
-    new HashMock(),
+    hash,
     new JWTMock(),
   )
 
@@ -20,12 +21,15 @@ describe('AuthenticateInstitutionUseCase', () => {
     await institutionRepository.reset()
   })
 
-  it('should generate a access token with JWT format', async () => {
-    const institution = await institutionFactory.make()
+  it.only('should generate a access token with JWT format', async () => {
+    const rawPassword = some.text()
+    const institution = await institutionFactory.make({
+      password: hash.generate(rawPassword),
+    })
 
     const response = await sut.execute({
       email: institution.email,
-      password: institution.password,
+      password: rawPassword,
     })
 
     expect(JWT_TOKEN_REGEX.test(response.accessToken)).toBeTruthy()
@@ -38,7 +42,6 @@ describe('AuthenticateInstitutionUseCase', () => {
       email: institution.email,
       password: institution.password,
     })
-
     const secondResponse = await sut.execute({
       email: institution.email,
       password: institution.password,
