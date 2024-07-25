@@ -5,17 +5,19 @@ import {
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
 import { IPetRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/pet'
 
-type IPetItemData = Omit<
+type IFilters = Pick<
   IPetProps,
-  'description' | 'environmentSize' | 'institutionId' | 'IBGECode'
+  | 'lifeStage'
+  | 'energyLevel'
+  | 'size'
+  | 'independenceLevel'
+  | 'IBGECode'
+  | 'animalType'
+  | 'institutionId'
 >
 
-interface IFilters extends Partial<Omit<IPetItemData, 'name' | 'animalType'>> {
-  IBGECode: string
-}
-
 interface IRequest {
-  filters: IFilters
+  filters: Partial<IFilters>
 }
 
 export class ListPetsUseCase implements IBaseUseCase {
