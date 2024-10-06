@@ -1,4 +1,4 @@
-import { IRepository } from '@/domain/core/adapters/database/repository/base'
+import { IRepository } from '@/domain/core/adapters/repository'
 import {
   IInstitutionProps,
   Institution,

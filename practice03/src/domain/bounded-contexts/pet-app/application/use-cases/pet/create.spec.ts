@@ -2,7 +2,7 @@ import { InMemoryPetRepository } from '@/domain/bounded-contexts/pet-app/__tests
 import { CreatePetUseCase } from './create'
 import { InMemoryInstitutionRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/institution'
 import { makeInstitutionData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
-import { ResourceNotFoundError } from '@/domain/core/adapters/database/errors/resource-not-found'
+import { ResourceNotFoundError } from '@/domain/core/adapters/repository/errors/resource-not-found'
 import { ID } from '@/domain/core/entities/id'
 import { makePetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
 import { IPetProps } from '../../../enterprise/entities/pet'

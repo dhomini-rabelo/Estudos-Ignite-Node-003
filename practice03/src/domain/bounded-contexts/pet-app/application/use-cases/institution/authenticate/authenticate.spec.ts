@@ -1,10 +1,10 @@
 import { InMemoryInstitutionRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/institution'
-import { HashMock } from '@tests/mocks/hash'
+import { HashMock } from '@tests/mocks/adapters/hash'
 import { AuthenticateInstitutionUseCase } from './authenticate'
 import { InstitutionFactory } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
 import { some } from '@tests/utils/some'
 import { InvalidCredentialsError } from './errors/invalid-credentials'
-import { JWTMock } from '@tests/mocks/jwt'
+import { JWTMock } from '@tests/mocks/adapters/jwt'
 
 describe('AuthenticateInstitutionUseCase', () => {
   const JWT_TOKEN_REGEX = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/

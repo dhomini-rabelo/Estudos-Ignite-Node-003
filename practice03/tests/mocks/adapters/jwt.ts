@@ -1,5 +1,5 @@
+import { IJWT } from '@/adapters/jwt'
 import { some } from '@tests/utils/some'
-import { IJWT } from '../../src/adapters/jwt'
 
 export class JWTMock extends IJWT {
   generateToken(id: string): string {
