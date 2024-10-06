@@ -1,8 +1,8 @@
 import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
-import { IHash } from '@/adapters/hash/contract'
+import { IHash } from '@/adapters/hash'
 import { InvalidCredentialsError } from '../../errors/invalid-credentials'
-import { IJWT } from '@/adapters/jwt/contract'
+import { IJWT } from '@/adapters/jwt'
 
 interface IRequest {
   email: string

@@ -1,6 +1,6 @@
 import { some } from '@tests/utils/some'
 import { IAddress } from '../../src/domain/bounded-contexts/pet-app/enterprise/value-objects/address'
-import { IAddressGenerator } from '../../src/adapters/address/contract'
+import { IAddressGenerator } from '../../src/adapters/address'
 
 export class AddressGeneratorMock implements IAddressGenerator {
   async fromZipCode(zipCode: string): Promise<IAddress> {

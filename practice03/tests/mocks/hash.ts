@@ -1,4 +1,4 @@
-import { IHash } from '../../src/adapters/hash/contract'
+import { IHash } from '../../src/adapters/hash'
 
 export class HashMock implements IHash {
   generate(input: string): string {
