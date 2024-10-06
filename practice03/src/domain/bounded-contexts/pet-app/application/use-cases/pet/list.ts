@@ -4,7 +4,7 @@ import {
   Pet,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
 
-import { IBaseUseCase } from '../../../../../core/use-cases/base'
+import { UseCase } from '../../../../../core/use-cases/base'
 
 interface Payload
   extends Partial<
@@ -21,7 +21,7 @@ interface Payload
   IBGECode: PetProps['IBGECode']
 }
 
-export class ListPetsUseCase implements IBaseUseCase {
+export class ListPetsUseCase implements UseCase {
   constructor(private petRepository: PetRepository) {}
 
   async execute(payload: Payload): Promise<Pet[]> {

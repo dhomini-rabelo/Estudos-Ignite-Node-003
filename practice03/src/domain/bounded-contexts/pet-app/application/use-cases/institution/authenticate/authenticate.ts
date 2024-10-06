@@ -1,7 +1,7 @@
 import { HashModule } from '@/adapters/hash'
 import { JWTModule } from '@/adapters/jwt'
 import { InstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
-import { IBaseUseCase } from '@/domain/core/use-cases/base'
+import { UseCase } from '@/domain/core/use-cases/base'
 
 import { InvalidCredentialsError } from './errors/invalid-credentials'
 
@@ -14,7 +14,7 @@ interface Response {
   accessToken: string
 }
 
-export class AuthenticateInstitutionUseCase implements IBaseUseCase {
+export class AuthenticateInstitutionUseCase implements UseCase {
   constructor(
     private institutionRepository: InstitutionRepository,
     private hashModule: HashModule,

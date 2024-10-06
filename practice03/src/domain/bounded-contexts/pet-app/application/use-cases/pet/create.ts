@@ -6,13 +6,13 @@ import {
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
 import { ID } from '@/domain/core/entities/id'
 
-import { IBaseUseCase } from '../../../../../core/use-cases/base'
+import { UseCase } from '../../../../../core/use-cases/base'
 
 interface Payload extends Omit<PetProps, 'IBGECode' | 'institutionId'> {
   institutionId: string
 }
 
-export class CreatePetUseCase implements IBaseUseCase {
+export class CreatePetUseCase implements UseCase {
   constructor(
     private petRepository: PetRepository,
     private institutionRepository: InstitutionRepository,
