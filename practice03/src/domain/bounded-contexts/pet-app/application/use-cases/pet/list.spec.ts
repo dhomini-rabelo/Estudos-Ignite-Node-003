@@ -1,7 +1,8 @@
+import { createPetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
 import { InMemoryPetRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/pet'
-import { ListPetsUseCase } from './list'
-import { makePetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
 import { some } from '@tests/utils/some'
+
+import { ListPetsUseCase } from './list'
 
 describe('ListPetsUseCase', () => {
   const petRepository = new InMemoryPetRepository()
@@ -15,9 +16,9 @@ describe('ListPetsUseCase', () => {
     const cityIBGECodeA = some.text()
     const cityIBGECodeB = some.text()
     const createdPets = await Promise.all([
-      petRepository.create(makePetData({ IBGECode: cityIBGECodeA })),
-      petRepository.create(makePetData({ IBGECode: cityIBGECodeB })),
-      petRepository.create(makePetData({ IBGECode: cityIBGECodeA })),
+      petRepository.create(createPetData({ IBGECode: cityIBGECodeA })),
+      petRepository.create(createPetData({ IBGECode: cityIBGECodeB })),
+      petRepository.create(createPetData({ IBGECode: cityIBGECodeA })),
     ])
 
     const response = await sut.execute({
@@ -38,13 +39,13 @@ describe('ListPetsUseCase', () => {
     const cityIBGECode = some.text()
     const createdPets = await Promise.all([
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, lifeStage: 'junior' }),
+        createPetData({ IBGECode: cityIBGECode, lifeStage: 'junior' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, lifeStage: 'adult' }),
+        createPetData({ IBGECode: cityIBGECode, lifeStage: 'adult' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, lifeStage: 'senior' }),
+        createPetData({ IBGECode: cityIBGECode, lifeStage: 'senior' }),
       ),
     ])
 
@@ -67,13 +68,13 @@ describe('ListPetsUseCase', () => {
     const cityIBGECode = some.text()
     const createdPets = await Promise.all([
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, energyLevel: 'small' }),
+        createPetData({ IBGECode: cityIBGECode, energyLevel: 'small' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, energyLevel: 'medium' }),
+        createPetData({ IBGECode: cityIBGECode, energyLevel: 'medium' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, energyLevel: 'large' }),
+        createPetData({ IBGECode: cityIBGECode, energyLevel: 'large' }),
       ),
     ])
 
@@ -96,13 +97,13 @@ describe('ListPetsUseCase', () => {
     const cityIBGECode = some.text()
     const createdPets = await Promise.all([
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, size: 'small' }),
+        createPetData({ IBGECode: cityIBGECode, size: 'small' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, size: 'small' }),
+        createPetData({ IBGECode: cityIBGECode, size: 'small' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, size: 'large' }),
+        createPetData({ IBGECode: cityIBGECode, size: 'large' }),
       ),
     ])
 
@@ -123,13 +124,13 @@ describe('ListPetsUseCase', () => {
     const cityIBGECode = some.text()
     const createdPets = await Promise.all([
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, independenceLevel: 'small' }),
+        createPetData({ IBGECode: cityIBGECode, independenceLevel: 'small' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, independenceLevel: 'small' }),
+        createPetData({ IBGECode: cityIBGECode, independenceLevel: 'small' }),
       ),
       petRepository.create(
-        makePetData({ IBGECode: cityIBGECode, independenceLevel: 'large' }),
+        createPetData({ IBGECode: cityIBGECode, independenceLevel: 'large' }),
       ),
     ])
 
@@ -152,7 +153,7 @@ describe('ListPetsUseCase', () => {
     const cityIBGECode = some.text()
     const createdPets = await Promise.all([
       petRepository.create(
-        makePetData({
+        createPetData({
           IBGECode: cityIBGECode,
           lifeStage: 'junior',
           energyLevel: 'small',
@@ -161,7 +162,7 @@ describe('ListPetsUseCase', () => {
         }),
       ),
       petRepository.create(
-        makePetData({
+        createPetData({
           IBGECode: cityIBGECode,
           lifeStage: 'senior',
           energyLevel: 'small',
@@ -170,7 +171,7 @@ describe('ListPetsUseCase', () => {
         }),
       ),
       petRepository.create(
-        makePetData({
+        createPetData({
           IBGECode: cityIBGECode,
           lifeStage: 'junior',
           energyLevel: 'small',
@@ -179,7 +180,7 @@ describe('ListPetsUseCase', () => {
         }),
       ),
       petRepository.create(
-        makePetData({
+        createPetData({
           IBGECode: cityIBGECode,
           lifeStage: 'junior',
           energyLevel: 'small',
@@ -188,7 +189,7 @@ describe('ListPetsUseCase', () => {
         }),
       ),
       petRepository.create(
-        makePetData({
+        createPetData({
           IBGECode: cityIBGECode,
           lifeStage: 'junior',
           energyLevel: 'large',

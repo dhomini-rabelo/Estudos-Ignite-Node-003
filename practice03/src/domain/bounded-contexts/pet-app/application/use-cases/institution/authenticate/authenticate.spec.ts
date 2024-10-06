@@ -1,10 +1,11 @@
+import { InstitutionFactory } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
 import { InMemoryInstitutionRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/institution'
 import { HashMock } from '@tests/mocks/adapters/hash'
-import { AuthenticateInstitutionUseCase } from './authenticate'
-import { InstitutionFactory } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
-import { some } from '@tests/utils/some'
-import { InvalidCredentialsError } from './errors/invalid-credentials'
 import { JWTMock } from '@tests/mocks/adapters/jwt'
+import { some } from '@tests/utils/some'
+
+import { AuthenticateInstitutionUseCase } from './authenticate'
+import { InvalidCredentialsError } from './errors/invalid-credentials'
 
 describe('AuthenticateInstitutionUseCase', () => {
   const JWT_TOKEN_REGEX = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/
@@ -23,7 +24,7 @@ describe('AuthenticateInstitutionUseCase', () => {
 
   it('should generate a access token with JWT format', async () => {
     const rawPassword = some.text()
-    const institution = await institutionFactory.make({
+    const institution = await institutionFactory.create({
       password: hash.generate(rawPassword),
     })
 
@@ -37,7 +38,7 @@ describe('AuthenticateInstitutionUseCase', () => {
 
   it('should generate a different access token for each run with the same institution', async () => {
     const rawPassword = some.text()
-    const institution = await institutionFactory.make({
+    const institution = await institutionFactory.create({
       password: hash.generate(rawPassword),
     })
 
@@ -55,11 +56,11 @@ describe('AuthenticateInstitutionUseCase', () => {
 
   it('should generate a different access token for each run with institutions different', async () => {
     const rawPasswordA = some.text()
-    const institutionA = await institutionFactory.make({
+    const institutionA = await institutionFactory.create({
       password: hash.generate(rawPasswordA),
     })
     const rawPasswordB = some.text()
-    const institutionB = await institutionFactory.make({
+    const institutionB = await institutionFactory.create({
       password: hash.generate(rawPasswordB),
     })
 
@@ -85,7 +86,7 @@ describe('AuthenticateInstitutionUseCase', () => {
   })
 
   it('should throw InvalidCredentialsError for incorrect password', async () => {
-    const institution = await institutionFactory.make()
+    const institution = await institutionFactory.create()
 
     await expect(async () => {
       await sut.execute({

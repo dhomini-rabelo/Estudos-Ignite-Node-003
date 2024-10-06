@@ -1,36 +1,35 @@
+import { Factory } from '@tests/types/factory'
 import { some } from '@tests/utils/some'
-import { Address } from '../../enterprise/value-objects/address'
-import { IInstitutionProps } from '../../enterprise/entities/institution'
-import { IInstitutionRepository } from '../../application/repositories/institution'
 
-export function makeInstitutionData({
+import { IInstitutionRepository } from '../../application/repositories/institution'
+import {
+  IInstitutionProps,
+  Institution,
+} from '../../enterprise/entities/institution'
+import { createAddress } from './address'
+
+export function createInstitutionData({
   name = some.text(),
   cellNumber = some.text(),
   email = some.text(),
   password = some.text(),
-  address,
+  address = createAddress(),
 }: Partial<IInstitutionProps> = {}): IInstitutionProps {
   return {
     name,
     cellNumber,
     email,
     password,
-    address:
-      address ||
-      Address.reference({
-        city: some.text(),
-        IBGECode: some.text(),
-        number: some.text(),
-        stateAcronym: some.text(2),
-        zipCode: some.text(),
-      }),
+    address,
   }
 }
 
-export class InstitutionFactory {
+export class InstitutionFactory
+  implements Factory<IInstitutionProps, Institution>
+{
   constructor(private institutionRepository: IInstitutionRepository) {}
 
-  async make(data: Partial<IInstitutionProps> = {}) {
-    return this.institutionRepository.create(makeInstitutionData(data))
+  async create(data: Partial<IInstitutionProps> = {}) {
+    return this.institutionRepository.create(createInstitutionData(data))
   }
 }

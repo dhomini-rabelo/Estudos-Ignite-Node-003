@@ -26,6 +26,7 @@ describe('CreateInstitutionUseCase', () => {
       email: 'test@test.com',
       password: 'xxxx',
     })
+
     expect(response.id.toString()).toEqual(expect.any(String))
     expect(
       (await institutionRepository.get({ id: response.id })).isEqual(response),

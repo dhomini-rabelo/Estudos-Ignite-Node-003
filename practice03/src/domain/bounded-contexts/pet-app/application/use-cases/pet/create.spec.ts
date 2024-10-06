@@ -1,11 +1,12 @@
-import { InMemoryPetRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/pet'
-import { CreatePetUseCase } from './create'
+import { createInstitutionData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
+import { createPetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
 import { InMemoryInstitutionRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/institution'
-import { makeInstitutionData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
+import { InMemoryPetRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/pet'
 import { ResourceNotFoundError } from '@/domain/core/adapters/repository/errors/resource-not-found'
 import { ID } from '@/domain/core/entities/id'
-import { makePetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
+
 import { IPetProps } from '../../../enterprise/entities/pet'
+import { CreatePetUseCase } from './create'
 
 const makeRequest = (petProps: IPetProps) => ({
   ...petProps,
@@ -24,11 +25,11 @@ describe('CreatePetUseCase', () => {
 
   it('should create a pet', async () => {
     const institution = await institutionRepository.create(
-      makeInstitutionData(),
+      createInstitutionData(),
     )
 
     const response = await sut.execute(
-      makeRequest(makePetData({ institutionId: institution.id })),
+      makeRequest(createPetData({ institutionId: institution.id })),
     )
 
     expect(response.id.toString()).toEqual(expect.any(String))
@@ -39,11 +40,11 @@ describe('CreatePetUseCase', () => {
 
   it('should ensure that the pet.IBGECode is the same as the institution.IBGECode', async () => {
     const institution = await institutionRepository.create(
-      makeInstitutionData(),
+      createInstitutionData(),
     )
 
     const response = await sut.execute(
-      makeRequest(makePetData({ institutionId: institution.id })),
+      makeRequest(createPetData({ institutionId: institution.id })),
     )
 
     expect(response.IBGECode).toEqual(institution.address.IBGECode)
@@ -51,7 +52,7 @@ describe('CreatePetUseCase', () => {
 
   it('should throw ResourceNotFoundError when institution not exists', async () => {
     await expect(async () => {
-      await sut.execute(makeRequest(makePetData({ institutionId: new ID() })))
+      await sut.execute(makeRequest(createPetData({ institutionId: new ID() })))
     }).rejects.toThrow(ResourceNotFoundError)
   })
 })

@@ -1,8 +1,11 @@
+import { Factory } from '@tests/types/factory'
 import { some } from '@tests/utils/some'
-import { IPetProps } from '../../enterprise/entities/pet'
-import { ID } from '../../../../core/entities/id'
 
-export function makePetData({
+import { ID } from '../../../../core/entities/id'
+import { IPetRepository } from '../../application/repositories/pet'
+import { IPetProps, Pet } from '../../enterprise/entities/pet'
+
+export function createPetData({
   name = some.text(),
   institutionId = new ID(),
   IBGECode = some.text(),
@@ -25,5 +28,13 @@ export function makePetData({
     energyLevel,
     independenceLevel,
     environmentSize,
+  }
+}
+
+export class PetFactory implements Factory<IPetProps, Pet> {
+  constructor(private PetRepository: IPetRepository) {}
+
+  async create(data: Partial<IPetProps> = {}) {
+    return this.PetRepository.create(createPetData(data))
   }
 }
