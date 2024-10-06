@@ -1,9 +1,11 @@
+import { EmptyRecord } from 'types/simple'
+
+import { IEntity } from '@/domain/core/entities/base'
+import { WithID } from '@/domain/core/entities/types'
+
 import { ID } from '../../entities/id'
 import { ResourceNotFoundError } from './errors/resource-not-found'
 import { ResourceRepeated } from './errors/resource-repeated'
-import { IEntity } from '@/domain/core/entities/base'
-import { WithID } from '@/domain/core/entities/types'
-import { EmptyRecord } from 'types/simple'
 
 export interface IRepository<Entity, Props extends EmptyRecord> {
   create(props: Props): Promise<Entity>
@@ -20,7 +22,7 @@ export abstract class IInMemoryRepository<
 > implements IRepository<Entity, Props>
 {
   protected items: Entity[] = []
-  protected entity: {
+  protected entity: Entity & {
     create(props: Props): Entity
   }
 
@@ -35,7 +37,7 @@ export abstract class IInMemoryRepository<
     if (itemsFound.length > 1) {
       throw new ResourceRepeated()
     } else if (itemsFound.length === 0) {
-      throw new ResourceNotFoundError()
+      throw new ResourceNotFoundError(this.entity)
     }
     return itemsFound[0]
   }

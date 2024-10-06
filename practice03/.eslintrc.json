@@ -17,6 +17,7 @@
                     "module", 
                     "/^@/",
                     "/^@tests/", 
+                    "/^@typing/", 
                     ["parent", "sibling", "index"]
                 ],
                 "alphabetize": { "order": "asc", "ignoreCase": true }
