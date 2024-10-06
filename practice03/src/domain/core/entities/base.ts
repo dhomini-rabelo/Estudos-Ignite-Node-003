@@ -26,3 +26,11 @@ export abstract class IEntity<Props extends EmptyRecord = any> {
     return entity === this || entity.id === this._id
   }
 }
+
+export type EntityWithStatic<
+  Entity extends typeof IEntity<any>,
+  EntityProps extends EmptyRecord,
+> = Entity & {
+  create(props: EntityProps): Promise<IEntity>
+  reference(id: ID, props: EntityProps): Promise<IEntity>
+}

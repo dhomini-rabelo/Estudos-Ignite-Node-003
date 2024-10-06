@@ -1,4 +1,6 @@
-import { IInMemoryRepository } from '../../../../core/adapters/repository'
+import { EntityWithStatic } from '@/domain/core/entities/base'
+import { InMemoryRepository } from '@tests/utils/in-memory-repository'
+
 import { InstitutionRepository } from '../../application/repositories/institution'
 import {
   InstitutionProps,
@@ -6,8 +8,11 @@ import {
 } from '../../enterprise/entities/institution'
 
 export class InMemoryInstitutionRepository
-  extends IInMemoryRepository<Institution, InstitutionProps>
+  extends InMemoryRepository<typeof Institution, InstitutionProps>
   implements InstitutionRepository
 {
-  protected entity = Institution
+  protected entity = Institution as EntityWithStatic<
+    typeof Institution,
+    InstitutionProps
+  >
 }

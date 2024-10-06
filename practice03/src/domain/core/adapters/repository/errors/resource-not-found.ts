@@ -6,7 +6,7 @@ import { DatabaseError } from './_base'
 export class ResourceNotFoundError extends DatabaseError {
   public type = 'resource-not-found'
 
-  constructor(public readonly entity: IEntity<EmptyRecord>) {
+  constructor(public readonly entity: typeof IEntity<EmptyRecord>) {
     super()
   }
 }
