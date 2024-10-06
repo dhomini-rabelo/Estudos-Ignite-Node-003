@@ -8,8 +8,8 @@ export class AddressGeneratorMock implements AddressGenerator {
       zipCode,
       IBGECode: some.text(),
       city: some.text(),
-      state: some.text(),
       number: some.text(),
+      stateAcronym: some.text(),
     }
   }
 }

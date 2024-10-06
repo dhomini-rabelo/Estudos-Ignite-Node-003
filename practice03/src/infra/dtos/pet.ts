@@ -1,5 +1,6 @@
-import { ErrorMessages } from '@/infra/dtos/errors/messages'
 import * as zod from 'zod'
+
+import { ErrorMessages } from '@/infra/dtos/errors/messages'
 
 export const PetDTOFields = {
   name: zod.string({
