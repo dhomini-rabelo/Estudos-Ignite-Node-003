@@ -28,7 +28,7 @@ describe('ListPetsUseCase', () => {
     expect(response.length).toBe(2)
     expect(response).toEqual(
       expect.arrayContaining(
-        createdPets.filter((pet) => pet.IBGECode === cityIBGECodeA),
+        createdPets.filter((pet) => pet.props.IBGECode === cityIBGECodeA),
       ),
     )
   })
@@ -55,7 +55,7 @@ describe('ListPetsUseCase', () => {
     expect(response.length).toBe(1)
     expect(response).toEqual(
       expect.arrayContaining(
-        createdPets.filter((pet) => pet.lifeStage === 'junior'),
+        createdPets.filter((pet) => pet.props.lifeStage === 'junior'),
       ),
     )
   })
@@ -82,7 +82,7 @@ describe('ListPetsUseCase', () => {
     expect(response.length).toBe(1)
     expect(response).toEqual(
       expect.arrayContaining(
-        createdPets.filter((pet) => pet.energyLevel === 'small'),
+        createdPets.filter((pet) => pet.props.energyLevel === 'small'),
       ),
     )
   })
@@ -108,7 +108,9 @@ describe('ListPetsUseCase', () => {
 
     expect(response.length).toBe(2)
     expect(response).toEqual(
-      expect.arrayContaining(createdPets.filter((pet) => pet.size === 'small')),
+      expect.arrayContaining(
+        createdPets.filter((pet) => pet.props.size === 'small'),
+      ),
     )
   })
 
@@ -134,7 +136,7 @@ describe('ListPetsUseCase', () => {
     expect(response.length).toBe(2)
     expect(response).toEqual(
       expect.arrayContaining(
-        createdPets.filter((pet) => pet.independenceLevel === 'small'),
+        createdPets.filter((pet) => pet.props.independenceLevel === 'small'),
       ),
     )
   })
@@ -213,10 +215,10 @@ describe('ListPetsUseCase', () => {
       expect.arrayContaining(
         createdPets.filter(
           (pet) =>
-            pet.lifeStage === 'junior' &&
-            pet.energyLevel === 'small' &&
-            pet.size === 'small' &&
-            pet.independenceLevel === 'small',
+            pet.props.lifeStage === 'junior' &&
+            pet.props.energyLevel === 'small' &&
+            pet.props.size === 'small' &&
+            pet.props.independenceLevel === 'small',
         ),
       ),
     )

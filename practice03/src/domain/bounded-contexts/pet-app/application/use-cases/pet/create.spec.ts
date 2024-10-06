@@ -5,10 +5,10 @@ import { InMemoryPetRepository } from '@/domain/bounded-contexts/pet-app/__tests
 import { ResourceNotFoundError } from '@/domain/core/adapters/repository/errors/resource-not-found'
 import { ID } from '@/domain/core/entities/id'
 
-import { IPetProps } from '../../../enterprise/entities/pet'
+import { PetProps } from '../../../enterprise/entities/pet'
 import { CreatePetUseCase } from './create'
 
-const createPayload = (petProps: IPetProps) => ({
+const createPayload = (petProps: PetProps) => ({
   ...petProps,
   institutionId: petProps.institutionId.toValue(),
 })
@@ -44,7 +44,9 @@ describe('CreatePetUseCase', () => {
       createPayload(createPetData({ institutionId: institution.id })),
     )
 
-    expect(response.IBGECode).toEqual(institution.address.IBGECode)
+    expect(response.props.IBGECode).toEqual(
+      institution.props.address.props.IBGECode,
+    )
   })
 
   it('should throw ResourceNotFoundError when institution not exists', async () => {

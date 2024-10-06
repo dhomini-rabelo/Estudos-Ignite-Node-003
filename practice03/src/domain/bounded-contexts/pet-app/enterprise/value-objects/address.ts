@@ -1,4 +1,6 @@
-export interface IAddress {
+import { ValueObject } from '@/domain/core/entities/value-object'
+
+export interface AddressProps {
   zipCode: string
   IBGECode: string
   city: string
@@ -6,36 +8,12 @@ export interface IAddress {
   number: string
 }
 
-export class Address {
-  get IBGECode() {
-    return this.value.IBGECode
-  }
-
-  get zipCode() {
-    return this.value.zipCode
-  }
-
-  get city() {
-    return this.value.city
-  }
-
-  get stateAcronym() {
-    return this.value.stateAcronym
-  }
-
-  get number() {
-    return this.value.number
-  }
-
-  private constructor(private value: IAddress) {
-    Object.freeze(this)
-  }
-
-  static create(value: IAddress) {
+export class Address extends ValueObject<AddressProps> {
+  static create(value: AddressProps) {
     return new Address(value)
   }
 
-  static reference(value: IAddress) {
+  static reference(value: AddressProps) {
     return new Address(value)
   }
 }

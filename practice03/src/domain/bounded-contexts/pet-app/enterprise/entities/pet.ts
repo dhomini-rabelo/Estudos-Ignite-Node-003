@@ -1,7 +1,7 @@
 import { IEntity } from '../../../../core/entities/base'
 import { ID } from '../../../../core/entities/id'
 
-export interface IPetProps {
+export interface PetProps {
   name: string
   description: string
   animalType: 'cat' | 'dog'
@@ -14,52 +14,12 @@ export interface IPetProps {
   institutionId: ID
 }
 
-export class Pet extends IEntity<IPetProps> {
-  get name() {
-    return this.props.name
-  }
-
-  get description() {
-    return this.props.description
-  }
-
-  get animalType() {
-    return this.props.animalType
-  }
-
-  get lifeStage() {
-    return this.props.lifeStage
-  }
-
-  get size() {
-    return this.props.size
-  }
-
-  get energyLevel() {
-    return this.props.energyLevel
-  }
-
-  get independenceLevel() {
-    return this.props.independenceLevel
-  }
-
-  get environmentSize() {
-    return this.props.environmentSize
-  }
-
-  get IBGECode() {
-    return this.props.IBGECode
-  }
-
-  get institutionId() {
-    return this.props.institutionId
-  }
-
-  static create(props: IPetProps) {
+export class Pet extends IEntity<PetProps> {
+  static create(props: PetProps) {
     return new Pet(props)
   }
 
-  static reference(id: ID, props: IPetProps) {
+  static reference(id: ID, props: PetProps) {
     return new Pet(props, id)
   }
 }

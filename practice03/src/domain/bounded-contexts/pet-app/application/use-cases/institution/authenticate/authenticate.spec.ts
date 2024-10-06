@@ -29,7 +29,7 @@ describe('AuthenticateInstitutionUseCase', () => {
     })
 
     const response = await sut.execute({
-      email: institution.email,
+      email: institution.props.email,
       password: rawPassword,
     })
 
@@ -43,11 +43,11 @@ describe('AuthenticateInstitutionUseCase', () => {
     })
 
     const firstResponse = await sut.execute({
-      email: institution.email,
+      email: institution.props.email,
       password: rawPassword,
     })
     const secondResponse = await sut.execute({
-      email: institution.email,
+      email: institution.props.email,
       password: rawPassword,
     })
 
@@ -67,11 +67,11 @@ describe('AuthenticateInstitutionUseCase', () => {
     })
 
     const firstResponse = await sut.execute({
-      email: institutionA.email,
+      email: institutionA.props.email,
       password: rawPasswordA,
     })
     const secondResponse = await sut.execute({
-      email: institutionB.email,
+      email: institutionB.props.email,
       password: rawPasswordB,
     })
 
@@ -94,7 +94,7 @@ describe('AuthenticateInstitutionUseCase', () => {
 
     await expect(async () => {
       await sut.execute({
-        email: institution.email,
+        email: institution.props.email,
         password: some.text(),
       })
     }).rejects.toThrow(InvalidCredentialsError)

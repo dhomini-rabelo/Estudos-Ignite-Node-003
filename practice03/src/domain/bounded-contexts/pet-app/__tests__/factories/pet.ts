@@ -3,7 +3,7 @@ import { some } from '@tests/utils/some'
 
 import { ID } from '../../../../core/entities/id'
 import { PetRepository } from '../../application/repositories/pet'
-import { IPetProps, Pet } from '../../enterprise/entities/pet'
+import { PetProps, Pet } from '../../enterprise/entities/pet'
 
 export function createPetData({
   name = some.text(),
@@ -16,7 +16,7 @@ export function createPetData({
   energyLevel = some.valueBetween('small', 'medium', 'large'),
   independenceLevel = some.valueBetween('small', 'medium', 'large'),
   environmentSize = some.valueBetween('small', 'medium', 'large'),
-}: Partial<IPetProps> = {}): IPetProps {
+}: Partial<PetProps> = {}): PetProps {
   return {
     name,
     institutionId,
@@ -31,10 +31,10 @@ export function createPetData({
   }
 }
 
-export class PetFactory implements Factory<IPetProps, Pet> {
+export class PetFactory implements Factory<PetProps, Pet> {
   constructor(private PetRepository: PetRepository) {}
 
-  async create(data: Partial<IPetProps> = {}) {
+  async create(data: Partial<PetProps> = {}) {
     return this.PetRepository.create(createPetData(data))
   }
 }

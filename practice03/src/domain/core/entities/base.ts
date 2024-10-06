@@ -4,7 +4,7 @@ import { ID } from './id'
 
 export abstract class IEntity<Props extends EmptyRecord = any> {
   private _id: ID
-  protected props: Props
+  public readonly props: Props
 
   get id() {
     return this._id

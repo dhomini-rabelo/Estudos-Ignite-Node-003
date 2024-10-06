@@ -28,7 +28,7 @@ export class AuthenticateInstitutionUseCase implements IBaseUseCase {
 
     if (
       institution &&
-      this.passwordIsCorrect(payload.password, institution.password)
+      this.passwordIsCorrect(payload.password, institution.props.password)
     ) {
       return {
         accessToken: this.jwtModule.generateToken(institution.id.toString()),

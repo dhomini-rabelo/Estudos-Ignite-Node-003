@@ -3,7 +3,7 @@ import { some } from '@tests/utils/some'
 
 import { InstitutionRepository } from '../../application/repositories/institution'
 import {
-  IInstitutionProps,
+  InstitutionProps,
   Institution,
 } from '../../enterprise/entities/institution'
 import { createAddress } from './address'
@@ -14,7 +14,7 @@ export function createInstitutionData({
   email = some.text(),
   password = some.text(),
   address = createAddress(),
-}: Partial<IInstitutionProps> = {}): IInstitutionProps {
+}: Partial<InstitutionProps> = {}): InstitutionProps {
   return {
     name,
     cellNumber,
@@ -25,11 +25,11 @@ export function createInstitutionData({
 }
 
 export class InstitutionFactory
-  implements Factory<IInstitutionProps, Institution>
+  implements Factory<InstitutionProps, Institution>
 {
   constructor(private institutionRepository: InstitutionRepository) {}
 
-  async create(data: Partial<IInstitutionProps> = {}) {
+  async create(data: Partial<InstitutionProps> = {}) {
     return this.institutionRepository.create(createInstitutionData(data))
   }
 }

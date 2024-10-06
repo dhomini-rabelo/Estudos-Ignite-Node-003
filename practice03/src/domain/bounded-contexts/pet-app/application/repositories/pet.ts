@@ -1,5 +1,5 @@
 import { IRepository } from '@/domain/core/adapters/repository'
 
-import { IPetProps, Pet } from '../../enterprise/entities/pet'
+import { PetProps, Pet } from '../../enterprise/entities/pet'
 
-export type PetRepository = IRepository<Pet, IPetProps>
+export type PetRepository = IRepository<Pet, PetProps>

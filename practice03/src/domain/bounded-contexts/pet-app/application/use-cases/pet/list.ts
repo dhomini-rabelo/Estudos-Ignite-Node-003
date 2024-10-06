@@ -1,6 +1,6 @@
 import { PetRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/pet'
 import {
-  IPetProps,
+  PetProps,
   Pet,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
 
@@ -9,7 +9,7 @@ import { IBaseUseCase } from '../../../../../core/use-cases/base'
 interface Payload
   extends Partial<
     Pick<
-      IPetProps,
+      PetProps,
       | 'lifeStage'
       | 'energyLevel'
       | 'size'
@@ -18,7 +18,7 @@ interface Payload
       | 'institutionId'
     >
   > {
-  IBGECode: IPetProps['IBGECode']
+  IBGECode: PetProps['IBGECode']
 }
 
 export class ListPetsUseCase implements IBaseUseCase {

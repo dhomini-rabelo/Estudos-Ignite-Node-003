@@ -45,6 +45,6 @@ describe('CreateInstitutionUseCase', () => {
       password,
     })
 
-    expect(password).not.toBe(response.password)
+    expect(password).not.toBe(response.props.password)
   })
 })

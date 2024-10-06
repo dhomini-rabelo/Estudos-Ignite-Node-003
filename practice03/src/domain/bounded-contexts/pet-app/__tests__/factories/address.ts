@@ -1,6 +1,6 @@
 import { some } from '@tests/utils/some'
 
-import { Address, IAddress } from '../../enterprise/value-objects/address'
+import { Address, AddressProps } from '../../enterprise/value-objects/address'
 
 export function createAddressData({
   city = some.text(),
@@ -8,7 +8,7 @@ export function createAddressData({
   number = some.text(),
   stateAcronym = some.text(2),
   zipCode = some.text(),
-}: Partial<IAddress> = {}) {
+}: Partial<AddressProps> = {}) {
   return {
     city,
     IBGECode,
@@ -18,6 +18,6 @@ export function createAddressData({
   }
 }
 
-export function createAddress(data: Partial<IAddress> = {}) {
+export function createAddress(data: Partial<AddressProps> = {}) {
   return Address.reference(createAddressData(data))
 }
