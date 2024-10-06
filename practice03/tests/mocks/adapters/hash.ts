@@ -1,4 +1,4 @@
-import { IHash } from '../../src/adapters/hash'
+import { IHash } from '@/adapters/hash'
 
 export class HashMock implements IHash {
   generate(input: string): string {

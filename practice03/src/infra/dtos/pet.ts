@@ -1,4 +1,4 @@
-import { ErrorMessages } from '@/domain/core/use-cases/errors/validation-error/messages'
+import { ErrorMessages } from '@/infra/dtos/errors/messages'
 import * as zod from 'zod'
 
 export const PetDTOFields = {
