@@ -4,7 +4,7 @@ import { EmptyRecord } from '@typing/simple'
 import { DatabaseError } from './_base'
 
 export class ResourceNotFoundError extends DatabaseError {
-  public type = 'resource-not-found'
+  public readonly type = 'resource-not-found'
 
   constructor(public readonly entity: typeof IEntity<EmptyRecord>) {
     super()

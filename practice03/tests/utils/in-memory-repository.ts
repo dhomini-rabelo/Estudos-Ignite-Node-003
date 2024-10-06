@@ -10,7 +10,7 @@ import { WithID } from '@/domain/core/entities/types'
 export abstract class InMemoryRepository<
   Entity extends typeof IEntity<any>,
   Props extends EmptyRecord,
-> implements Repository<IEntity, Props>
+> implements Repository<IEntity>
 {
   protected items: IEntity[] = []
   protected entity: EntityWithStatic<Entity, Props>

@@ -1,3 +1,3 @@
 export abstract class DatabaseError extends Error {
-  abstract type: string
+  abstract readonly type: string
 }
