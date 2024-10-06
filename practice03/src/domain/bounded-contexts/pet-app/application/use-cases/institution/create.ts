@@ -5,8 +5,8 @@ import {
   Institution,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/institution'
 import { Address } from '@/domain/bounded-contexts/pet-app/enterprise/value-objects/address'
-import { IAddressGenerator } from '@/adapters/address'
-import { IHash } from '@/adapters/hash'
+import { AddressGenerator } from '@/adapters/address'
+import { HashModule } from '@/adapters/hash'
 
 interface IRequest extends Omit<IInstitutionProps, 'address'> {
   zipCode: string
@@ -15,8 +15,8 @@ interface IRequest extends Omit<IInstitutionProps, 'address'> {
 export class CreateInstitutionUseCase implements IBaseUseCase {
   constructor(
     private institutionRepository: IInstitutionRepository,
-    private addressGenerator: IAddressGenerator,
-    private hash: IHash,
+    private addressGenerator: AddressGenerator,
+    private hash: HashModule,
   ) {}
 
   async execute(request: IRequest): Promise<Institution> {

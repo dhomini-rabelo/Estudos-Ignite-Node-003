@@ -1,6 +1,6 @@
-import { IHash } from '@/adapters/hash'
+import { HashModule } from '@/adapters/hash'
 
-export class HashMock implements IHash {
+export class HashMock implements HashModule {
   generate(input: string): string {
     return input.concat('///')
   }
