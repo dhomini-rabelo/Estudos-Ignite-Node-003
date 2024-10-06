@@ -7,3 +7,4 @@ export type NullObject<T> = {
 export type TrueObject<T> = {
   [K in keyof T]: true
 }
+export type Overwrite<T, R> = Omit<T, keyof R> & R
