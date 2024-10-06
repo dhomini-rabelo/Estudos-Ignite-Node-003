@@ -2,7 +2,7 @@ import { EmptyRecord } from 'types/simple'
 
 import { ID } from './id'
 
-export abstract class IEntity<Props extends EmptyRecord = any> {
+export abstract class Entity<Props extends EmptyRecord = any> {
   private _id: ID
   public readonly props: Props
 
@@ -22,15 +22,12 @@ export abstract class IEntity<Props extends EmptyRecord = any> {
     }[propName]
   }
 
-  public isEqual(entity: IEntity<object>) {
+  public isEqual(entity: Entity<object>) {
     return entity === this || entity.id === this._id
   }
 }
 
-export type EntityWithStatic<
-  Entity extends typeof IEntity<any>,
-  EntityProps extends EmptyRecord,
-> = Entity & {
-  create(props: EntityProps): Promise<IEntity>
-  reference(id: ID, props: EntityProps): Promise<IEntity>
+export type EntityWithStatic<EntityClass extends Entity> = EntityClass & {
+  create(props: EntityClass['props']): Promise<EntityClass>
+  reference(id: ID, props: EntityClass['props']): Promise<EntityClass>
 }

@@ -1,27 +1,25 @@
-import { EmptyRecord } from 'types/simple'
-
 import { Repository } from '@/domain/core/adapters/repository'
 import { ResourceNotFoundError } from '@/domain/core/adapters/repository/errors/resource-not-found'
 import { ResourceRepeated } from '@/domain/core/adapters/repository/errors/resource-repeated'
-import { EntityWithStatic, IEntity } from '@/domain/core/entities/base'
+import { EntityWithStatic, Entity } from '@/domain/core/entities/base'
 import { ID } from '@/domain/core/entities/id'
 import { WithID } from '@/domain/core/entities/types'
 
-export abstract class InMemoryRepository<
-  Entity extends typeof IEntity<any>,
-  Props extends EmptyRecord,
-> implements Repository<IEntity>
+export abstract class InMemoryRepository<EntityClass extends Entity>
+  implements Repository<EntityClass>
 {
-  protected items: IEntity[] = []
-  protected entity: EntityWithStatic<Entity, Props>
+  protected items: EntityClass[] = []
+  protected entity: EntityWithStatic<EntityClass>
 
-  async create(props: Props) {
+  async create(props: EntityClass['props']) {
     const newPet = await this.entity.create(props)
     this.items.push(newPet)
     return newPet
   }
 
-  async get(props: Partial<WithID<Props>>): Promise<IEntity> {
+  async get(
+    props: Partial<WithID<EntityClass['props']>>,
+  ): Promise<EntityClass> {
     const itemsFound = this.items.filter((item) => this.compare(item, props))
     if (itemsFound.length > 1) {
       throw new ResourceRepeated()
@@ -31,7 +29,9 @@ export abstract class InMemoryRepository<
     return itemsFound[0]
   }
 
-  async findUnique(props: Partial<WithID<Props>>): Promise<IEntity | null> {
+  async findUnique(
+    props: Partial<WithID<EntityClass['props']>>,
+  ): Promise<EntityClass | null> {
     const itemsFound = this.items.filter((item) => this.compare(item, props))
     if (itemsFound.length > 1) {
       throw new ResourceRepeated()
@@ -39,12 +39,14 @@ export abstract class InMemoryRepository<
     return itemsFound.length === 1 ? itemsFound[0] : null
   }
 
-  async findFirst(props: Partial<WithID<Props>>): Promise<IEntity | null> {
+  async findFirst(
+    props: Partial<WithID<EntityClass['props']>>,
+  ): Promise<EntityClass | null> {
     const itemsFound = this.items.filter((item) => this.compare(item, props))
     return itemsFound.length === 1 ? itemsFound[0] : null
   }
 
-  async findMany(props: Partial<WithID<Props>>) {
+  async findMany(props: Partial<WithID<EntityClass['props']>>) {
     return this.items.filter((item) => this.compare(item, props))
   }
 
@@ -52,7 +54,10 @@ export abstract class InMemoryRepository<
     this.items = []
   }
 
-  private compare(item: IEntity, props: Partial<WithID<Props>>): boolean {
+  private compare(
+    item: EntityClass,
+    props: Partial<WithID<EntityClass['props']>>,
+  ): boolean {
     return Object.entries(props).every(
       ([fieldName, fieldValue]: [string, any]) => {
         const prop = item.getProp(fieldName)

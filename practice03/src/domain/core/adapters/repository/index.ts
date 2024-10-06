@@ -1,12 +1,23 @@
 import { WithID } from '@/domain/core/entities/types'
 
-import { IEntity } from '../../entities/base'
+import { Entity } from '../../entities/base'
 
-export interface Repository<Entity extends IEntity> {
-  create(props: Entity['props']): Promise<Entity>
-  get(props: Partial<WithID<Entity['props']>>): Promise<Entity>
-  findUnique(props: Partial<WithID<Entity['props']>>): Promise<Entity | null>
-  findFirst(props: Partial<WithID<Entity['props']>>): Promise<Entity | null>
-  findMany(params: Partial<WithID<Entity['props']>>): Promise<Entity[]>
+export interface Repository<EntityClass extends Entity> {
+  create(props: EntityClass['props']): Promise<EntityClass>
+
+  get(props: Partial<WithID<EntityClass['props']>>): Promise<EntityClass>
+
+  findUnique(
+    props: Partial<WithID<EntityClass['props']>>,
+  ): Promise<EntityClass | null>
+
+  findFirst(
+    props: Partial<WithID<EntityClass['props']>>,
+  ): Promise<EntityClass | null>
+
+  findMany(
+    params: Partial<WithID<EntityClass['props']>>,
+  ): Promise<EntityClass[]>
+
   reset(): Promise<void>
 }

@@ -1,4 +1,4 @@
-import { IEntity } from '../../../../core/entities/base'
+import { Entity } from '../../../../core/entities/base'
 import { ID } from '../../../../core/entities/id'
 
 export interface PetProps {
@@ -14,7 +14,7 @@ export interface PetProps {
   institutionId: ID
 }
 
-export class Pet extends IEntity<PetProps> {
+export class Pet extends Entity<PetProps> {
   static create(props: PetProps) {
     return new Pet(props)
   }
