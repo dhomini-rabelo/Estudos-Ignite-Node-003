@@ -1,6 +1,6 @@
-import { IPetProps, Pet } from '../../enterprise/entities/pet'
-import { IPetRepository } from '../../application/repositories/pet'
 import { IInMemoryRepository } from '../../../../core/adapters/repository'
+import { IPetRepository } from '../../application/repositories/pet'
+import { IPetProps, Pet } from '../../enterprise/entities/pet'
 
 export class InMemoryPetRepository
   extends IInMemoryRepository<Pet, IPetProps>
