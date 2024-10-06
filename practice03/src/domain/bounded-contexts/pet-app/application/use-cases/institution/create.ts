@@ -1,12 +1,13 @@
-import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
-import { IBaseUseCase } from '../../../../../core/use-cases/base'
+import { AddressGenerator } from '@/adapters/address'
+import { HashModule } from '@/adapters/hash'
+import { InstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
 import {
   IInstitutionProps,
   Institution,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/institution'
 import { Address } from '@/domain/bounded-contexts/pet-app/enterprise/value-objects/address'
-import { AddressGenerator } from '@/adapters/address'
-import { HashModule } from '@/adapters/hash'
+
+import { IBaseUseCase } from '../../../../../core/use-cases/base'
 
 interface IRequest extends Omit<IInstitutionProps, 'address'> {
   zipCode: string
@@ -14,7 +15,7 @@ interface IRequest extends Omit<IInstitutionProps, 'address'> {
 
 export class CreateInstitutionUseCase implements IBaseUseCase {
   constructor(
-    private institutionRepository: IInstitutionRepository,
+    private institutionRepository: InstitutionRepository,
     private addressGenerator: AddressGenerator,
     private hash: HashModule,
   ) {}

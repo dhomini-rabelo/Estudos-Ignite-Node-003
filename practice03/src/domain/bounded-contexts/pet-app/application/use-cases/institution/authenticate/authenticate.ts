@@ -1,8 +1,9 @@
-import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
-import { IBaseUseCase } from '@/domain/core/use-cases/base'
 import { HashModule } from '@/adapters/hash'
-import { InvalidCredentialsError } from './errors/invalid-credentials'
 import { JWTModule } from '@/adapters/jwt'
+import { InstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
+import { IBaseUseCase } from '@/domain/core/use-cases/base'
+
+import { InvalidCredentialsError } from './errors/invalid-credentials'
 
 interface IRequest {
   email: string
@@ -15,7 +16,7 @@ interface IResponse {
 
 export class AuthenticateInstitutionUseCase implements IBaseUseCase {
   constructor(
-    private institutionRepository: IInstitutionRepository,
+    private institutionRepository: InstitutionRepository,
     private hash: HashModule,
     private jwt: JWTModule,
   ) {}

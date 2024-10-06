@@ -1,5 +1,5 @@
 import { IInMemoryRepository } from '../../../../core/adapters/repository'
-import { IInstitutionRepository } from '../../application/repositories/institution'
+import { InstitutionRepository } from '../../application/repositories/institution'
 import {
   IInstitutionProps,
   Institution,
@@ -7,7 +7,7 @@ import {
 
 export class InMemoryInstitutionRepository
   extends IInMemoryRepository<Institution, IInstitutionProps>
-  implements IInstitutionRepository
+  implements InstitutionRepository
 {
   protected entity = Institution
 }

@@ -2,7 +2,7 @@ import { Factory } from '@tests/types/factory'
 import { some } from '@tests/utils/some'
 
 import { ID } from '../../../../core/entities/id'
-import { IPetRepository } from '../../application/repositories/pet'
+import { PetRepository } from '../../application/repositories/pet'
 import { IPetProps, Pet } from '../../enterprise/entities/pet'
 
 export function createPetData({
@@ -32,7 +32,7 @@ export function createPetData({
 }
 
 export class PetFactory implements Factory<IPetProps, Pet> {
-  constructor(private PetRepository: IPetRepository) {}
+  constructor(private PetRepository: PetRepository) {}
 
   async create(data: Partial<IPetProps> = {}) {
     return this.PetRepository.create(createPetData(data))

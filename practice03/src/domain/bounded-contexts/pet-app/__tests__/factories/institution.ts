@@ -1,7 +1,7 @@
 import { Factory } from '@tests/types/factory'
 import { some } from '@tests/utils/some'
 
-import { IInstitutionRepository } from '../../application/repositories/institution'
+import { InstitutionRepository } from '../../application/repositories/institution'
 import {
   IInstitutionProps,
   Institution,
@@ -27,7 +27,7 @@ export function createInstitutionData({
 export class InstitutionFactory
   implements Factory<IInstitutionProps, Institution>
 {
-  constructor(private institutionRepository: IInstitutionRepository) {}
+  constructor(private institutionRepository: InstitutionRepository) {}
 
   async create(data: Partial<IInstitutionProps> = {}) {
     return this.institutionRepository.create(createInstitutionData(data))

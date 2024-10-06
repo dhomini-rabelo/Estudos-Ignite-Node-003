@@ -1,11 +1,12 @@
+import { InstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
+import { PetRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/pet'
 import {
   IPetProps,
   Pet,
 } from '@/domain/bounded-contexts/pet-app/enterprise/entities/pet'
-import { IBaseUseCase } from '../../../../../core/use-cases/base'
-import { IPetRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/pet'
-import { IInstitutionRepository } from '@/domain/bounded-contexts/pet-app/application/repositories/institution'
 import { ID } from '@/domain/core/entities/id'
+
+import { IBaseUseCase } from '../../../../../core/use-cases/base'
 
 interface IRequest extends Omit<IPetProps, 'IBGECode' | 'institutionId'> {
   institutionId: string
@@ -13,8 +14,8 @@ interface IRequest extends Omit<IPetProps, 'IBGECode' | 'institutionId'> {
 
 export class CreatePetUseCase implements IBaseUseCase {
   constructor(
-    private petRepository: IPetRepository,
-    private institutionRepository: IInstitutionRepository,
+    private petRepository: PetRepository,
+    private institutionRepository: InstitutionRepository,
   ) {}
 
   async execute(request: IRequest): Promise<Pet> {
