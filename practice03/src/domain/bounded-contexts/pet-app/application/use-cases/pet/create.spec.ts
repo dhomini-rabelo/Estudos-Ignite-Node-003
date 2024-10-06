@@ -45,7 +45,7 @@ describe('CreatePetUseCase', () => {
     )
 
     expect(response.props.IBGECode).toEqual(
-      institution.props.address.props.IBGECode,
+      institution.props.address.value.IBGECode,
     )
   })
 

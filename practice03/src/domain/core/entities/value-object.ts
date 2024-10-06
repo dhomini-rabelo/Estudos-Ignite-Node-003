@@ -1,10 +1,8 @@
-import { EmptyRecord } from 'types/simple'
+export abstract class ValueObject<Props = any> {
+  public readonly value: Readonly<Props>
 
-export abstract class ValueObject<Props extends EmptyRecord = any> {
-  public readonly props: Readonly<Props>
-
-  protected constructor(props: Props) {
-    this.props = props
+  protected constructor(value: Props) {
+    this.value = value
     Object.freeze(this)
   }
 }

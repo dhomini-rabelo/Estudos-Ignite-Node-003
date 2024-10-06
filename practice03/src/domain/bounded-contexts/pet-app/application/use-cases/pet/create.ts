@@ -26,7 +26,7 @@ export class CreatePetUseCase implements IBaseUseCase {
     return this.petRepository.create({
       ...payload,
       institutionId: new ID(payload.institutionId),
-      IBGECode: institution.props.address.props.IBGECode,
+      IBGECode: institution.props.address.value.IBGECode,
     })
   }
 }
