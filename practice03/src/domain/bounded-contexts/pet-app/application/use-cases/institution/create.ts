@@ -9,7 +9,7 @@ import { Address } from '@/domain/bounded-contexts/pet-app/enterprise/value-obje
 
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
 
-interface IRequest extends Omit<IInstitutionProps, 'address'> {
+interface Payload extends Omit<IInstitutionProps, 'address'> {
   zipCode: string
 }
 
@@ -20,12 +20,12 @@ export class CreateInstitutionUseCase implements IBaseUseCase {
     private hash: HashModule,
   ) {}
 
-  async execute(request: IRequest): Promise<Institution> {
+  async execute(payload: Payload): Promise<Institution> {
     return this.institutionRepository.create({
-      ...request,
-      password: this.hash.generate(request.password),
+      ...payload,
+      password: this.hash.generate(payload.password),
       address: Address.create(
-        await this.addressGenerator.fromZipCode(request.zipCode),
+        await this.addressGenerator.fromZipCode(payload.zipCode),
       ),
     })
   }

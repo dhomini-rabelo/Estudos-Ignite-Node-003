@@ -1,3 +1,3 @@
 export interface IBaseUseCase {
-  execute(request: any): Promise<any>
+  execute(payload: any): Promise<any>
 }

@@ -11,10 +11,10 @@ describe('AuthenticateInstitutionUseCase', () => {
   const JWT_TOKEN_REGEX = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/
   const institutionRepository = new InMemoryInstitutionRepository()
   const institutionFactory = new InstitutionFactory(institutionRepository)
-  const hash = new HashMock()
+  const hashModule = new HashMock()
   const sut = new AuthenticateInstitutionUseCase(
     institutionRepository,
-    hash,
+    hashModule,
     new JWTMock(),
   )
 
@@ -25,7 +25,7 @@ describe('AuthenticateInstitutionUseCase', () => {
   it('should generate a access token with JWT format', async () => {
     const rawPassword = some.text()
     const institution = await institutionFactory.create({
-      password: hash.generate(rawPassword),
+      password: hashModule.generate(rawPassword),
     })
 
     const response = await sut.execute({
@@ -39,7 +39,7 @@ describe('AuthenticateInstitutionUseCase', () => {
   it('should generate a different access token for each run with the same institution', async () => {
     const rawPassword = some.text()
     const institution = await institutionFactory.create({
-      password: hash.generate(rawPassword),
+      password: hashModule.generate(rawPassword),
     })
 
     const firstResponse = await sut.execute({
@@ -51,17 +51,19 @@ describe('AuthenticateInstitutionUseCase', () => {
       password: rawPassword,
     })
 
-    expect(firstResponse.accessToken).not.toBe(secondResponse.accessToken)
+    expect(
+      firstResponse.accessToken !== secondResponse.accessToken,
+    ).toBeTruthy()
   })
 
-  it('should generate a different access token for each run with institutions different', async () => {
+  it('should generate a different access token for different institutions', async () => {
     const rawPasswordA = some.text()
     const institutionA = await institutionFactory.create({
-      password: hash.generate(rawPasswordA),
+      password: hashModule.generate(rawPasswordA),
     })
     const rawPasswordB = some.text()
     const institutionB = await institutionFactory.create({
-      password: hash.generate(rawPasswordB),
+      password: hashModule.generate(rawPasswordB),
     })
 
     const firstResponse = await sut.execute({
@@ -73,7 +75,9 @@ describe('AuthenticateInstitutionUseCase', () => {
       password: rawPasswordB,
     })
 
-    expect(firstResponse.accessToken).not.toBe(secondResponse.accessToken)
+    expect(
+      firstResponse.accessToken !== secondResponse.accessToken,
+    ).toBeTruthy()
   })
 
   it('should throw InvalidCredentialsError for nonexistent email', async () => {

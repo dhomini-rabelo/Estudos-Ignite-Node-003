@@ -6,25 +6,25 @@ import {
 
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
 
-type IFilters = Pick<
-  IPetProps,
-  | 'lifeStage'
-  | 'energyLevel'
-  | 'size'
-  | 'independenceLevel'
-  | 'IBGECode'
-  | 'animalType'
-  | 'institutionId'
->
-
-interface IRequest {
-  filters: Partial<IFilters>
+interface Payload
+  extends Partial<
+    Pick<
+      IPetProps,
+      | 'lifeStage'
+      | 'energyLevel'
+      | 'size'
+      | 'independenceLevel'
+      | 'animalType'
+      | 'institutionId'
+    >
+  > {
+  IBGECode: IPetProps['IBGECode']
 }
 
 export class ListPetsUseCase implements IBaseUseCase {
   constructor(private petRepository: PetRepository) {}
 
-  async execute(request: IRequest): Promise<Pet[]> {
-    return this.petRepository.findMany(request.filters)
+  async execute(payload: Payload): Promise<Pet[]> {
+    return this.petRepository.findMany(payload)
   }
 }

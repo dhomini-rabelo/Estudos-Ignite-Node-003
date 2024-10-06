@@ -22,9 +22,7 @@ describe('ListPetsUseCase', () => {
     ])
 
     const response = await sut.execute({
-      filters: {
-        IBGECode: cityIBGECodeA,
-      },
+      IBGECode: cityIBGECodeA,
     })
 
     expect(response.length).toBe(2)
@@ -50,10 +48,8 @@ describe('ListPetsUseCase', () => {
     ])
 
     const response = await sut.execute({
-      filters: {
-        IBGECode: cityIBGECode,
-        lifeStage: 'junior',
-      },
+      IBGECode: cityIBGECode,
+      lifeStage: 'junior',
     })
 
     expect(response.length).toBe(1)
@@ -79,10 +75,8 @@ describe('ListPetsUseCase', () => {
     ])
 
     const response = await sut.execute({
-      filters: {
-        IBGECode: cityIBGECode,
-        energyLevel: 'small',
-      },
+      IBGECode: cityIBGECode,
+      energyLevel: 'small',
     })
 
     expect(response.length).toBe(1)
@@ -108,10 +102,8 @@ describe('ListPetsUseCase', () => {
     ])
 
     const response = await sut.execute({
-      filters: {
-        IBGECode: cityIBGECode,
-        size: 'small',
-      },
+      IBGECode: cityIBGECode,
+      size: 'small',
     })
 
     expect(response.length).toBe(2)
@@ -135,10 +127,8 @@ describe('ListPetsUseCase', () => {
     ])
 
     const response = await sut.execute({
-      filters: {
-        IBGECode: cityIBGECode,
-        independenceLevel: 'small',
-      },
+      IBGECode: cityIBGECode,
+      independenceLevel: 'small',
     })
 
     expect(response.length).toBe(2)
@@ -152,6 +142,7 @@ describe('ListPetsUseCase', () => {
   it('should filter pets by IBGECode, lifeStage, energyLevel, size and independenceLevel', async () => {
     const cityIBGECode = some.text()
     const createdPets = await Promise.all([
+      // found pets
       petRepository.create(
         createPetData({
           IBGECode: cityIBGECode,
@@ -161,6 +152,16 @@ describe('ListPetsUseCase', () => {
           independenceLevel: 'small',
         }),
       ),
+      petRepository.create(
+        createPetData({
+          IBGECode: cityIBGECode,
+          lifeStage: 'junior',
+          energyLevel: 'small',
+          size: 'small',
+          independenceLevel: 'small',
+        }),
+      ),
+      // not found pets
       petRepository.create(
         createPetData({
           IBGECode: cityIBGECode,
@@ -174,7 +175,7 @@ describe('ListPetsUseCase', () => {
         createPetData({
           IBGECode: cityIBGECode,
           lifeStage: 'junior',
-          energyLevel: 'small',
+          energyLevel: 'medium',
           size: 'small',
           independenceLevel: 'small',
         }),
@@ -192,7 +193,7 @@ describe('ListPetsUseCase', () => {
         createPetData({
           IBGECode: cityIBGECode,
           lifeStage: 'junior',
-          energyLevel: 'large',
+          energyLevel: 'small',
           size: 'small',
           independenceLevel: 'large',
         }),
@@ -200,13 +201,11 @@ describe('ListPetsUseCase', () => {
     ])
 
     const response = await sut.execute({
-      filters: {
-        IBGECode: cityIBGECode,
-        lifeStage: 'junior',
-        energyLevel: 'small',
-        size: 'small',
-        independenceLevel: 'small',
-      },
+      IBGECode: cityIBGECode,
+      lifeStage: 'junior',
+      energyLevel: 'small',
+      size: 'small',
+      independenceLevel: 'small',
     })
 
     expect(response.length).toBe(2)

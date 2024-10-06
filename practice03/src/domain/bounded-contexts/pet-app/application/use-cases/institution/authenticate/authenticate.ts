@@ -5,40 +5,43 @@ import { IBaseUseCase } from '@/domain/core/use-cases/base'
 
 import { InvalidCredentialsError } from './errors/invalid-credentials'
 
-interface IRequest {
+interface Payload {
   email: string
   password: string
 }
 
-interface IResponse {
+interface Response {
   accessToken: string
 }
 
 export class AuthenticateInstitutionUseCase implements IBaseUseCase {
   constructor(
     private institutionRepository: InstitutionRepository,
-    private hash: HashModule,
-    private jwt: JWTModule,
+    private hashModule: HashModule,
+    private jwtModule: JWTModule,
   ) {}
 
-  async execute(request: IRequest): Promise<IResponse> {
+  async execute(payload: Payload): Promise<Response> {
     const institution = await this.institutionRepository.findUnique({
-      email: request.email,
+      email: payload.email,
     })
 
     if (
       institution &&
-      this.passwordIsCorrect(request.password, institution.password)
+      this.passwordIsCorrect(payload.password, institution.password)
     ) {
       return {
-        accessToken: this.jwt.generateToken(institution.id.toString()),
+        accessToken: this.jwtModule.generateToken(institution.id.toString()),
       }
     }
 
     throw new InvalidCredentialsError()
   }
 
-  passwordIsCorrect(requestPassword: string, hashedPassword: string) {
-    return this.hash.compare(requestPassword, hashedPassword)
+  private passwordIsCorrect(
+    payloadPassword: string,
+    correctHashedPassword: string,
+  ) {
+    return this.hashModule.compare(payloadPassword, correctHashedPassword)
   }
 }

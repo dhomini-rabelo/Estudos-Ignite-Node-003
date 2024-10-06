@@ -8,7 +8,7 @@ import { ID } from '@/domain/core/entities/id'
 
 import { IBaseUseCase } from '../../../../../core/use-cases/base'
 
-interface IRequest extends Omit<IPetProps, 'IBGECode' | 'institutionId'> {
+interface Payload extends Omit<IPetProps, 'IBGECode' | 'institutionId'> {
   institutionId: string
 }
 
@@ -18,13 +18,14 @@ export class CreatePetUseCase implements IBaseUseCase {
     private institutionRepository: InstitutionRepository,
   ) {}
 
-  async execute(request: IRequest): Promise<Pet> {
+  async execute(payload: Payload): Promise<Pet> {
     const institution = await this.institutionRepository.get({
-      id: new ID(request.institutionId),
+      id: new ID(payload.institutionId),
     })
+
     return this.petRepository.create({
-      ...request,
-      institutionId: new ID(request.institutionId),
+      ...payload,
+      institutionId: new ID(payload.institutionId),
       IBGECode: institution.address.IBGECode,
     })
   }

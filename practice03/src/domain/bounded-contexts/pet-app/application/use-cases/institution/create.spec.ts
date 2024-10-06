@@ -1,8 +1,9 @@
 import { InMemoryInstitutionRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/institution'
-import { CreateInstitutionUseCase } from './create'
 import { AddressGeneratorMock } from '@tests/mocks/adapters/address'
-import { some } from '@tests/utils/some'
 import { HashMock } from '@tests/mocks/adapters/hash'
+import { some } from '@tests/utils/some'
+
+import { CreateInstitutionUseCase } from './create'
 
 describe('CreateInstitutionUseCase', () => {
   const institutionRepository = new InMemoryInstitutionRepository()

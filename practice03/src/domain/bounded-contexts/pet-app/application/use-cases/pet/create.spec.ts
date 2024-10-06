@@ -1,4 +1,4 @@
-import { createInstitutionData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
+import { InstitutionFactory } from '@/domain/bounded-contexts/pet-app/__tests__/factories/institution'
 import { createPetData } from '@/domain/bounded-contexts/pet-app/__tests__/factories/pet'
 import { InMemoryInstitutionRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/institution'
 import { InMemoryPetRepository } from '@/domain/bounded-contexts/pet-app/__tests__/repositories/pet'
@@ -8,7 +8,7 @@ import { ID } from '@/domain/core/entities/id'
 import { IPetProps } from '../../../enterprise/entities/pet'
 import { CreatePetUseCase } from './create'
 
-const makeRequest = (petProps: IPetProps) => ({
+const createPayload = (petProps: IPetProps) => ({
   ...petProps,
   institutionId: petProps.institutionId.toValue(),
 })
@@ -16,6 +16,7 @@ const makeRequest = (petProps: IPetProps) => ({
 describe('CreatePetUseCase', () => {
   const petRepository = new InMemoryPetRepository()
   const institutionRepository = new InMemoryInstitutionRepository()
+  const institutionFactory = new InstitutionFactory(institutionRepository)
   const sut = new CreatePetUseCase(petRepository, institutionRepository)
 
   beforeEach(async () => {
@@ -24,12 +25,10 @@ describe('CreatePetUseCase', () => {
   })
 
   it('should create a pet', async () => {
-    const institution = await institutionRepository.create(
-      createInstitutionData(),
-    )
+    const institution = await institutionFactory.create()
 
     const response = await sut.execute(
-      makeRequest(createPetData({ institutionId: institution.id })),
+      createPayload(createPetData({ institutionId: institution.id })),
     )
 
     expect(response.id.toString()).toEqual(expect.any(String))
@@ -39,12 +38,10 @@ describe('CreatePetUseCase', () => {
   })
 
   it('should ensure that the pet.IBGECode is the same as the institution.IBGECode', async () => {
-    const institution = await institutionRepository.create(
-      createInstitutionData(),
-    )
+    const institution = await institutionFactory.create()
 
     const response = await sut.execute(
-      makeRequest(createPetData({ institutionId: institution.id })),
+      createPayload(createPetData({ institutionId: institution.id })),
     )
 
     expect(response.IBGECode).toEqual(institution.address.IBGECode)
@@ -52,7 +49,9 @@ describe('CreatePetUseCase', () => {
 
   it('should throw ResourceNotFoundError when institution not exists', async () => {
     await expect(async () => {
-      await sut.execute(makeRequest(createPetData({ institutionId: new ID() })))
+      await sut.execute(
+        createPayload(createPetData({ institutionId: new ID() })),
+      )
     }).rejects.toThrow(ResourceNotFoundError)
   })
 })
